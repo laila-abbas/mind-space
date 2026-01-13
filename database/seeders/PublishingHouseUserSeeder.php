@@ -20,6 +20,8 @@ class PublishingHouseUserSeeder extends Seeder
         foreach($publishingHouses as $house) {
             $assignedUsers = $users->random(fake()->numberBetween(1, 5));
             foreach($assignedUsers as $user) {
+                // All users are already readers from User seeder
+                $user->assignRole('Publisher');
                 $house->users()->attach($user->id, [
                     'position' => fake()->randomElement(['editor', 'reviewer', 'manager'])
                 ]);

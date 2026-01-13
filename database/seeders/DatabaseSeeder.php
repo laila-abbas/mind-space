@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         DB::transaction(function () {
             $this->call([
+                RolesAndPermissionsSeeder::class,
+                AdminSeeder::class,
                 UserSeeder::class,
                 CategorySeeder::class,
                 PublishingHouseSeeder::class,

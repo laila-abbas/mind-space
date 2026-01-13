@@ -15,11 +15,13 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->count(20)
+            ->reader()
             ->create();
 
         User::factory()
             ->count(30)
-            ->withAuthor()
+            ->author()
+            ->reader()
             ->create();
     }
 }

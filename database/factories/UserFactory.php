@@ -44,9 +44,16 @@ class UserFactory extends Factory
         ]);
     }
 
-    public function withAuthor($count = 1) {
-        return $this->has(
-            Author::factory()->count($count)
-        );
+    public function author() {
+        return $this->afterCreating(function ($user) {
+            $user->assignRole('Author');
+            Author::factory()->create(['user_id' => $user->id]);
+        });
+    }
+
+    public function reader() {
+        return $this->afterCreating(function ($user) {
+            $user->assignRole('Reader');
+        });
     }
 }
