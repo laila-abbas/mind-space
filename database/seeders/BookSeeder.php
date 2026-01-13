@@ -23,7 +23,7 @@ class BookSeeder extends Seeder
         $publishedBooks = Book::factory()
             ->published()
             ->count(30)
-            ->withEditions(fake()->numberBetween(1, 4))
+            ->withEditions(fake()->numberBetween(2, 4))
             ->create();
 
         $categories = Category::whereNotNull('parent_id')->get();
