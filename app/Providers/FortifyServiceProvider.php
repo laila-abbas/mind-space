@@ -13,8 +13,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
-use App\Http\Responses\CustomLoginResponse;
+use App\Http\Responses\CustomAuthResponse;
 use Laravel\Fortify\Contracts\LoginResponse;
+use Laravel\Fortify\Contracts\RegisterResponse;
 use Pest\ArchPresets\Custom;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -24,7 +25,8 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->instance(LoginResponse::class, new CustomLoginResponse());
+        $this->app->instance(RegisterResponse::class, new CustomAuthResponse());
+        $this->app->instance(LoginResponse::class, new CustomAuthResponse());
     }
 
     /**

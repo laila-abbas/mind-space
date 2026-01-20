@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->string('pen_name');
+            $table->string('pen_name')->nullable();
             $table->text('biography')->nullable();
             $table->string('website_url')->nullable();
             $table->timestamps();

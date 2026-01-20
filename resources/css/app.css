@@ -11,6 +11,15 @@
     --color-black: #060606;
     --font-hanken-grotesk: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
     --text-2xs: 0.625rem; 
+    
     --color-background: #F5FAF6;
+    --color-primary: #c2e0cb;
+    --color-secondary: #93cc9f;
+    --color-accent: #303030;
     --color-text: #1f2933;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+    -webkit-text-fill-color: #1f2933;
 }

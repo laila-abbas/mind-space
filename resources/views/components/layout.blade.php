@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mind Space</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..600;1,100..600&display=swap" rel="stylesheet">
@@ -34,8 +35,7 @@
                     @endcan
                     <form method='POST' action='/logout'>
                         @csrf
-                        @method('DELETE')
-                        <button>Log Out</button>
+                        <button class="hover:text-red-500 transition-colors cursor-pointer">Log Out</button>
                     </form>
                 </div>
             @endauth
