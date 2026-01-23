@@ -1,6 +1,6 @@
 <x-layout>
     <x-page-heading>Register</x-page-heading>
-    <x-forms.form method='POST' action='/register' x-data="{ isAuthor: {{ old('is_author') ? 'true' : 'false' }} }">
+    <x-forms.form method='POST' action="{{ route('register.store') }}" x-data="{ isAuthor: {{ old('is_author') ? 'true' : 'false' }} }">
         <x-forms.input label='First Name' name='first_name' req />
         <x-forms.input label='Last Name' name='last_name' placeholder="Last Name (Optional)" />
         <x-forms.input label='Email' name='email' type='email' req />

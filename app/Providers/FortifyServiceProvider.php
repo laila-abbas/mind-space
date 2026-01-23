@@ -16,6 +16,9 @@ use Laravel\Fortify\Fortify;
 use App\Http\Responses\CustomAuthResponse;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\RegisterResponse;
+use Illuminate\Support\Facades\Password;
+use Laravel\Fortify\Http\Responses\FailedPasswordResetLinkRequestResponse;
+use Laravel\Fortify\Http\Responses\SuccessfulPasswordResetLinkRequestResponse;
 use Pest\ArchPresets\Custom;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -27,6 +30,8 @@ class FortifyServiceProvider extends ServiceProvider
     {
         $this->app->instance(RegisterResponse::class, new CustomAuthResponse());
         $this->app->instance(LoginResponse::class, new CustomAuthResponse());
+        // to prevent user enumeration attack (always show success message even if email wasn't found within the users table)
+        $this->app->extend(FailedPasswordResetLinkRequestResponse::class, fn () => new SuccessfulPasswordResetLinkRequestResponse(Password::RESET_LINK_SENT));
     }
 
     /**
@@ -55,6 +60,15 @@ class FortifyServiceProvider extends ServiceProvider
         });
         Fortify::registerView(function () {
             return view('auth.register');
+        });
+        Fortify::requestPasswordResetLinkView(function () {
+            return view('auth.forgot-password');
+        });
+        Fortify::resetPasswordView(function ($request) {
+            return view('auth.reset-password', ['request' => $request]);
+        });
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify-email');
         });
         // other views
     }

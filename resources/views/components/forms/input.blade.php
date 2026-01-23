@@ -24,26 +24,27 @@
                        hasSymbol() { return /[^A-Za-z0-9]/.test(this.password) },
                        longEnough() { return this.password.length >= 8 } 
                      }" 
-             class="relative">
-            <input
-                :type="show ? 'text' : 'password'"
-                {{ $attributes($defaults) }}
-                x-model="password"
-                class="{{ $defaults['class'] }} pr-12"
-            >
+        >
+             <div class='relative'>
+                <input
+                    :type="show ? 'text' : 'password'"
+                    {{ $attributes($defaults) }}
+                    x-model="password"
+                    class="{{ $defaults['class'] }} pr-12"
+                >
 
-            <button
-                type="button"
-                @click="show = !show"
-                class="absolute inset-y-0 right-4 flex items-center text-gray-500 cursor-pointer"
-                tabindex="-1"
-            >
-                <img x-show="!show" x-cloak src="{{ asset('icons/eye-show.svg') }}" class="w-5 h-5 text-gray-500">
-                <img x-show="show" x-cloak src="{{ asset('icons/eye-hide.svg') }}" class="w-5 h-5 text-gray-500">
-            </button>
-
+                <button
+                    type="button"
+                    @click="show = !show"
+                    class="absolute inset-y-0 right-4 cursor-pointer"
+                    tabindex="-1" {{-- tab key won't focus on it --}}
+                >
+                    <img x-show="!show" x-cloak src="{{ asset('icons/eye-show.svg') }}" class="w-5 h-5">
+                    <img x-show="show" x-cloak src="{{ asset('icons/eye-hide.svg') }}" class="w-5 h-5">
+                </button>
+             </div>
             @if ($strength)
-                <div x-show="password.length" class="text-sm mt-1, ml-3">
+                <div x-show="password.length" class="text-sm mt-1 ml-3">
                     <span
                         x-show="!longEnough() || !(hasLower() || hasUpper()) || !hasNumber()"
                         class="text-red-500"

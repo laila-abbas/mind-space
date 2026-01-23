@@ -17,9 +17,19 @@
     --color-secondary: #93cc9f;
     --color-accent: #303030;
     --color-text: #1f2933;
+    --color-dark: #0a8c44;
 }
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
     -webkit-text-fill-color: #1f2933;
+}
+
+
+/* for Edge (injected eye in passwords) */
+@layer utilities {
+    input[type="password"]::-ms-reveal,
+    input[type="password"]::-ms-clear {
+        display: none;
+    }
 }

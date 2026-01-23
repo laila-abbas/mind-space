@@ -1,12 +1,8 @@
 @props(['label', 'name'])
 
-@php
-    $isRequired = $attributes->has('req');
-@endphp
-
 <div>
     @if ($label)
-        <x-forms.label :$name :$label :req="$isRequired" />
+        <x-forms.label :$name :$label :req="$attributes->has('req')" />
     @endif
 
     <div class="mt-1">
