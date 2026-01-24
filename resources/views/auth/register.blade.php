@@ -1,20 +1,105 @@
 <x-layout>
+    
     <x-page-heading>Register</x-page-heading>
-    <x-forms.form method='POST' action="{{ route('register.store') }}" x-data="{ isAuthor: {{ old('is_author') ? 'true' : 'false' }} }">
-        <x-forms.input label='First Name' name='first_name' req />
-        <x-forms.input label='Last Name' name='last_name' placeholder="Last Name (Optional)" />
-        <x-forms.input label='Email' name='email' type='email' req />
-        <x-forms.input label='Password' name='password' type='password' req strength />
-        <x-forms.input label='Password Confirmation' name='password_confirmation' type='password' req placeholder='Re-enter your password' />
+    
+    <x-forms.form 
+        method='POST' 
+        action="{{ route('register.store') }}" 
+        x-data="{ 
+            isAuthor: {{ old('is_author') ? 'true' : 'false' }},
+            password: '',
+            passwordConfirmation: ''
+        }"
+    >
+    
+        <x-forms.input 
+            label='First Name' 
+            name='first_name' 
+            asterisk 
+            required 
+        />
 
-        <x-forms.checkbox name='is_author' label='Sign up as an Author' x-model='isAuthor' />
+        <x-forms.input 
+            label='Last Name' 
+            name='last_name' 
+            placeholder="Last Name (Optional)" 
+        />
 
-        <div x-show="isAuthor" x-transition class="space-y-4 mt-4">
-            <x-forms.input label='Pen Name' name='pen_name' placeholder='Pen Name (Optional)' />
-            <x-forms.input label='Biography' name='biography' type='textarea' placeholder='Biography... (Optional)' />
-            <x-forms.input label='Website URL' name='website_url' type='url' placeholder='Website URL (Optional)' />
+        <x-forms.input 
+            label='Email' 
+            name='email' 
+            type='email' 
+            asterisk 
+            required 
+        />
+
+        <x-forms.input 
+            label='Password' 
+            name='password' 
+            type='password' 
+            asterisk 
+            strength 
+            required
+            x-model="password"
+        />
+
+        <div>
+            <x-forms.input 
+                label='Password Confirmation' 
+                name='password_confirmation' 
+                type='password' 
+                asterisk 
+                required 
+                placeholder='Re-enter your password'
+                x-model="passwordConfirmation" 
+            />
+            <p
+                x-show="password && passwordConfirmation && password !== passwordConfirmation"
+                class="text-sm text-red-500 mt-1 ml-3"
+            >
+                Passwords do not match
+            </p>
         </div>
 
-        <x-forms.button>Create Account</x-forms.button>
+        <x-forms.checkbox 
+            name='is_author' 
+            label='Sign up as an Author' 
+            x-model='isAuthor' 
+        />
+
+        <div 
+            x-show="isAuthor" 
+            x-transition 
+            class="space-y-4 mt-4"
+        >
+
+            <x-forms.input 
+                label='Pen Name' 
+                name='pen_name' 
+                placeholder='Pen Name (Optional)' 
+            />
+
+            <x-forms.input 
+                label='Biography' 
+                name='biography' 
+                type='textarea' 
+                placeholder='Biography... (Optional)' 
+            />
+
+            <x-forms.input 
+                label='Website URL' 
+                name='website_url' 
+                type='url' 
+                placeholder='Website URL (Optional)' 
+            />
+        </div>
+
+        <x-forms.button
+            x-bind:disabled="(password && passwordConfirmation && password !== passwordConfirmation) 
+                            || (password.length && password.length < 8)"
+        >
+            Create Account
+        </x-forms.button>
+
     </x-forms.form>
 </x-layout>

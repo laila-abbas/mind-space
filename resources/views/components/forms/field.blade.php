@@ -2,7 +2,7 @@
 
 <div>
     @if ($label)
-        <x-forms.label :$name :$label :req="$attributes->has('req')" />
+        <x-forms.label :$name :$label :asterisk="$attributes->has('asterisk')" />
     @endif
 
     <div class="mt-1">
