@@ -72,11 +72,14 @@
                     x-show="value.length" 
                     class="text-sm mt-1 ml-3"
                 >
+                    <span x-show="!longEnough()" class="text-red-500">
+                        Password must be at least 8 characters
+                    </span>
                     <span
-                        x-show="!longEnough() || !(hasLower() || hasUpper()) || !hasNumber()"
+                        x-show="longEnough() && (!(hasLower() || hasUpper()) || !hasNumber())"
                         class="text-red-500"
                     >
-                        Weak - password must be at least 8 characters, letters, or numbers
+                        Weak - use characters, letters, and numbers
                     </span>
                     <span
                         x-show="

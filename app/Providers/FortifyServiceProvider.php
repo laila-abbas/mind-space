@@ -30,8 +30,6 @@ class FortifyServiceProvider extends ServiceProvider
     {
         $this->app->instance(RegisterResponse::class, new CustomAuthResponse());
         $this->app->instance(LoginResponse::class, new CustomAuthResponse());
-        // to prevent user enumeration attack (always show success message even if email wasn't found within the users table)
-        $this->app->extend(FailedPasswordResetLinkRequestResponse::class, fn () => new SuccessfulPasswordResetLinkRequestResponse(Password::RESET_LINK_SENT));
     }
 
     /**
@@ -48,7 +46,14 @@ class FortifyServiceProvider extends ServiceProvider
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
-            return Limit::perMinute(5)->by($throttleKey);
+            return Limit::perMinute(5)->by($throttleKey)
+                ->response(function() use ($request) {
+                    return redirect()->back()
+                        ->withInput($request->only('email'))
+                        ->withErrors([
+                            'email' => 'Too many login attempts. Please try again later.'
+                        ]);
+                });
         });
 
         RateLimiter::for('two-factor', function (Request $request) {
@@ -70,6 +75,5 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::verifyEmailView(function () {
             return view('auth.verify-email');
         });
-        // other views
     }
 }

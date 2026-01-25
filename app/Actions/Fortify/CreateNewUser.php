@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use App\Notifications\AlreadyHaveAccount;
+
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -18,7 +20,7 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @param  array<string, string>  $input
      */
-    public function create(array $input): User
+    public function create(array $input): ?User
     {
         Validator::make($input, [
             'first_name' => ['required', 'string', 'max:255'],
@@ -28,10 +30,17 @@ class CreateNewUser implements CreatesNewUsers
                 'string',
                 'email',
                 'max:255',
-                Rule::unique(User::class),
+                // Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
         ])->validate();
+
+        $existingUser = User::where('email', $input['email'])->first();
+
+        if ($existingUser) {
+            $existingUser->notify(new AlreadyHaveAccount());
+            return null;
+        }
 
         $user = User::create([
             'first_name' => $input['first_name'],

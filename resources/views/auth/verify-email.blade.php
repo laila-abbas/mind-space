@@ -8,11 +8,10 @@
             by clicking on the link we just emailed to you.
         </p>
 
-        @if (session('status') === 'verification-link-sent')
-            <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
-                A new verification link has been sent to your email address.
-            </div>
-        @endif
+        <x-alert  
+            message="A new verification link has been sent to your email address." 
+            :show="session('status') === 'verification-link-sent'" 
+        />
 
         <div class="flex flex-col gap-4">
             <form method="POST" action="{{ route('verification.send') }}">

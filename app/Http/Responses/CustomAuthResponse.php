@@ -10,7 +10,14 @@ class CustomAuthResponse implements LoginResponse, RegisterResponse
     public function toResponse($request)
     {
         $user = $request->user();
-
+        
+        if (!$user) { // if the email already taken the user would be null
+            return redirect()->route('register')->with(
+                'status',
+                'There was an error with your registration. Please try registering again'
+            );
+        }
+        
         if ($user->hasRole('Admin')) {
             return redirect()->route('admin.dashboard');
         }

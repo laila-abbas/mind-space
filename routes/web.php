@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+
 
 Route::get('/', function () {
     return view('home.index');
@@ -23,3 +26,13 @@ Route::middleware(['auth', 'verified', 'role:Publisher'])
         return view('publisher.dashboard');
     })->name('dashboard');
 });
+
+
+Route::post('/register', [RegisteredUserController::class, 'store'])
+    ->middleware('guest')
+    ->name('register.store');
+
+
+Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+    ->middleware(['guest'])
+    ->name('password.email');

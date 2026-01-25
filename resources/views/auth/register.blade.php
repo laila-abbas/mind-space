@@ -2,6 +2,8 @@
     
     <x-page-heading>Register</x-page-heading>
     
+    <x-alert type="error" />
+
     <x-forms.form 
         method='POST' 
         action="{{ route('register.store') }}" 
