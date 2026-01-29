@@ -62,4 +62,10 @@ class User extends Authenticatable implements MustVerifyEmail
                     ->withPivot('position')
                     ->withTimestamps();
     }
+
+    public function getAvatarUrlAttribute() {
+        return $this->avatar 
+        ? asset('storage/' . $this->avatar)
+        : asset('images/default-avatar.png');
+    }
 }

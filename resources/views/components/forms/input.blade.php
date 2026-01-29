@@ -18,12 +18,7 @@
     {{ $attributes }}
 >  
     @if($type === 'textarea')
-        <textarea 
-            {{ $attributes($defaults) }} 
-            rows="5"
-        >
-            {{ old($name) }}
-        </textarea>
+        <textarea {{ $attributes($defaults) }} rows="5">{{ old($name, $attributes->get('value')) }}</textarea>
 
     @elseif ($type === 'password')
         <div 

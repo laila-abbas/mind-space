@@ -78,7 +78,7 @@
             <x-forms.input 
                 label='Pen Name' 
                 name='pen_name' 
-                placeholder='Pen Name (Optional)' 
+                placeholder='How your name appears on books (Optional)' 
             />
 
             <x-forms.input 
@@ -89,16 +89,16 @@
             />
 
             <x-forms.input 
-                label='Website URL' 
+                label='Personal Website' 
                 name='website_url' 
                 type='url' 
-                placeholder='Website URL (Optional)' 
+                placeholder='https://... (Optional)' 
             />
         </div>
 
         <x-forms.button
-            x-bind:disabled="(password && passwordConfirmation && password !== passwordConfirmation) 
-                            || (password.length && password.length < 8)"
+            x-bind:disabled="(password !== passwordConfirmation) 
+                            || (password.length > 0 && password.length < 8)"
         >
             Create Account
         </x-forms.button>

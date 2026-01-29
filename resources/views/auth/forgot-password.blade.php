@@ -1,5 +1,5 @@
 <x-layout>
-    <x-auth-card>
+    <x-section-card center class='max-w-md'>
             
         <h1 class="text-xl font-semibold mb-6 text-center">Reset your password</h1>
 
@@ -16,5 +16,5 @@
 
             <x-forms.button>Send Reset Link</x-forms.button>
         </x-forms.form>
-    </x-auth-card>
+    </x-section-card>
 </x-layout>

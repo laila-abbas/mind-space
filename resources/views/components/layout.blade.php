@@ -30,15 +30,34 @@
             </div>
 
             @auth
-                <div class='space-x-6 font-bold flex'>
+                <x-dropdowns.dropdown>
+                    <x-slot name="trigger">
+                        <img 
+                            src="{{ auth()->user()->avatar_url }}" 
+                            alt="{{ auth()->user()->first_name }}" 
+                            class="w-10 h-10 rounded-full object-cover transition-all duration-300 ease-in-out hover:scale-105 hover:ring-1 hover:ring-accent/25 ring-offset-1 hover:shadow-xl">
+                    </x-slot>
+
+                    <x-dropdowns.item href="{{ route('profile.edit') }}">
+                        <x-slot name="icon">
+                            <img src="{{ asset('images/settings.svg') }}">
+                        </x-slot>
+                        Settings
+                    </x-dropdowns.item>
+                    
                     @can('submit book for publishing')
-                        <a href="/books/create">Add a Book</a> 
+                        <x-dropdowns.item href="/books/create">Add a Book</x-dropdowns.item>
                     @endcan
-                    <form method='POST' action='/logout'>
+
+                    <form method="POST" action="/logout">
                         @csrf
-                        <button class="hover:text-red-500 transition-colors cursor-pointer">Log Out</button>
+                        <button type="submit" class="group flex items-center gap-2 w-full text-left px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all duration-200 cursor-pointer">
+                            <img src="{{ asset('images/logout.svg') }}" class='w-4 h-4'>
+                            <span>Log Out</span>
+                        </button>
                     </form>
-                </div>
+                    
+                </x-dropdowns.dropdown>
             @endauth
 
             @guest

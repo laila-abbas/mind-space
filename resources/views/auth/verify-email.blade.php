@@ -1,5 +1,5 @@
 <x-layout>
-    <x-auth-card class='text-center max-w-xl'>
+    <x-section-card center class='text-center max-w-xl'>
         
         <h1 class="text-xl font-semibold mb-4">Verify your email address</h1>
 
@@ -32,5 +32,5 @@
             </form>
         </div>
 
-    </x-auth-card>
+    </x-section-card>
 </x-layout>

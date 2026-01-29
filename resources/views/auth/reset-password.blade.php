@@ -1,5 +1,5 @@
 <x-layout>
-    <x-auth-card>
+    <x-section-card center class='max-w-md'>
             
         <h1 class="text-xl font-semibold mb-6 text-center">Reset your password</h1>
 
@@ -55,12 +55,12 @@
             </div>
             
             <x-forms.button 
-                x-bind:disabled="(password && passwordConfirmation && password !== passwordConfirmation) 
-                                || (password.length && password.length < 8)"
+                x-bind:disabled="(password !== passwordConfirmation) 
+                                || (password.length > 0 && password.length < 8)"
             >
                 Reset Password
             </x-forms.button>
 
         </x-forms.form>
-    </x-auth-card>
+    </x-section-card>
 </x-layout>
