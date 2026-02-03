@@ -1,7 +1,9 @@
 <section class="space-y-6" x-data="imageCropper()">
-    <header>
-        <h2 class="text-2xl font-bold text-gray-900">Account Information</h2>
-    </header>
+ 
+    <x-section-header description="Update your personal details to keep your account current.">
+        Account Information
+    </x-section-header>
+
     <x-forms.form 
         method="PATCH" 
         action="{{ route('profile.updateInfo') }}" 
@@ -12,23 +14,21 @@
         <input type="hidden" name="cropped_avatar" :value="croppedData">
         <input type="hidden" name="remove_avatar" :value="removeAvatar">
 
-        <div class="flex items-center gap-10 px-6 py-4 bg-primary/5 rounded-2xl border border-primary/50">
+        <div class="flex items-center gap-10 px-6 py-4 bg-brand-soft rounded-2xl border border-border-soft">
             <div class="relative w-20 h-20 group">
                 <img 
                     :src="imageUrl"
-                    class="w-20 h-20 rounded-full object-cover ring-1 ring-primary"
+                    class="w-20 h-20 rounded-full object-cover ring-1 ring-brand"
                 >
 
                 <span
                     @click="deleteAvatar"
-                    class="absolute -top-2 -right-2 bg-white text-red-600 w-5.5 h-5.5 rounded-full flex items-center justify-center shadow-md border border-gray-100 hover:bg-red-50 hover:scale-110 transition-all duration-200 cursor-pointer opacity-0 group-hover:opacity-100 z-10"
+                    class="absolute -top-2 -right-2 bg-bg-surface w-5.5 h-5.5 rounded-full flex items-center justify-center shadow-md border border-bg-muted hover:bg-red-50 scale-105 hover:scale-110 transition-all duration-200 cursor-pointer opacity-0 group-hover:opacity-100 z-10"
                     title="Remove photo"
                 >
-                    <img 
-                        src="{{ asset('images/x.svg') }}" 
-                        alt="Remove photo"
-                        class="w-3.5 h-3.5"
-                    >
+                    <x-lucide-x
+                        class="w-3.5 h-3.5 text-text-muted dark:text-text-main"
+                    />
                 </span>
             </div>
             <div>
@@ -44,13 +44,13 @@
                     <button
                         type="button"
                         @click="$refs.fileInput.click()"
-                        class="cursor-pointer text-sm text-gray-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-secondary text-white hover:bg-third cursor-pointer"
+                        class="cursor-pointer text-sm mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-brand-hover text-bg-surface hover:bg-brand-accent cursor-pointer transition-all"
                     >
                         Choose Photo
                     </button>
 
                 </x-forms.field>
-                <p class="text-xs text-gray-500 mt-2">Recommended: Square JPG or PNG, max 2MB.</p>
+                <p class="text-xs text-text-subtle mt-2">Recommended: Square JPG or PNG, max 2MB.</p>
                 
                 <template x-if="removeAvatar">
                     <span class="text-xs text-orange-500 font-bold mt-1 block animate-pulse">
@@ -67,15 +67,15 @@
             </div>
         </div>
 
-        <div x-show="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" x-cloak>
-            <div class="bg-white rounded-2xl p-6 max-w-lg w-full shadow-xl">
+        <div x-show="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-overlay" x-cloak>
+            <div class="bg-bg-surface rounded-2xl p-6 max-w-lg w-full shadow-xl">
                 <h3 class="text-lg font-bold mb-4 text-center">Adjust your photo</h3>
-                <div class="overflow-hidden rounded-lg bg-gray-100 max-h-[400px]">
+                <div class="overflow-hidden rounded-lg bg-bg-muted max-h-[400px]">
                     <img id="cropper-target" class="block max-w-full">
                 </div>
                 <div class="flex justify-end gap-3 mt-6">
-                    <button type="button" @click="showModal = false" class="px-4 py-2 text-gray-600 font-semibold cursor-pointer">Cancel</button>
-                    <button type="button" @click="applyCrop" class="px-6 py-2 bg-secondary hover:bg-third cursor-pointer text-white rounded-xl font-bold">Done</button>
+                    <button type="button" @click="showModal = false" class="px-4 py-2 text-text-muted font-semibold cursor-pointer">Cancel</button>
+                    <button type="button" @click="applyCrop" class="px-6 py-2 bg-brand-hover hover:bg-brand-accent cursor-pointer text-bg-surface rounded-xl font-bold">Done</button>
                 </div>
             </div>
         </div>
@@ -88,8 +88,8 @@
         <x-forms.input label="Email" name="email" type="email" :errorBag="'updateProfileInformation'" :value="old('email', auth()->user()->email)" class="max-w-lg" required />
 
         @role('Author') 
-            <div class="pt-6 border-t border-gray-100">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-third mb-6">Author Info</h3>
+            <div class="pt-6 border-t border-bg-muted">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-brand-accent mb-6">Author Info</h3>
                 
                 <div class="space-y-6">
                     <x-forms.input label="Pen Name" name="pen_name" :errorBag="'updateProfileInformation'" :value="old('pen_name', auth()->user()->author?->pen_name)" placeholder="How your name appears on books" class="max-w-lg" />
@@ -100,6 +100,7 @@
                 </div>
             </div>
         @endrole
+        
         <div class="flex justify-end pt-4">
             <div>
                 <x-forms.button class='px-6 py-3'>Save Changes</x-forms.button>

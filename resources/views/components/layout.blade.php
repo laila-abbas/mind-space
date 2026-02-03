@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mind Space</title>
-    <script src="/js/alpine.min.js" defer></script>
-    <style>[x-cloak] { display: none !important; }</style>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..600;1,100..600&display=swap" rel="stylesheet">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class='bg-background text-text font-hanken-grotesk pb-20'>
+<body class="bg-bg-page text-text-main font-hanken-grotesk pb-20 transition-colors duration-300">
     <div class='px-12'>
-        <nav class='flex justify-between items-center py-4 border-b border-black/10'>
+        <nav class='flex justify-between items-center py-4 border-b border-border-soft'>
             <div>
                 <a href="/">
                     <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="" class="h-10 w-auto block">
@@ -32,15 +32,18 @@
             @auth
                 <x-dropdowns.dropdown>
                     <x-slot name="trigger">
-                        <img 
-                            src="{{ auth()->user()->avatar_url }}" 
-                            alt="{{ auth()->user()->first_name }}" 
-                            class="w-10 h-10 rounded-full object-cover transition-all duration-300 ease-in-out hover:scale-105 hover:ring-1 hover:ring-accent/25 ring-offset-1 hover:shadow-xl">
+                        <x-lucide-user-round
+                            class="w-10 h-10 p-2 rounded-full
+                                bg-bg-muted text-text-muted
+                                dark:bg-bg-surface dark:text-text-main dark:hover:ring-brand-accent-2
+                                transition-all duration-300
+                                hover:scale-105 hover:ring-1 hover:ring-brand-accent-2/25"
+                        />
                     </x-slot>
 
                     <x-dropdowns.item href="{{ route('profile.edit') }}">
                         <x-slot name="icon">
-                            <img src="{{ asset('images/settings.svg') }}">
+                            <x-lucide-settings />
                         </x-slot>
                         Settings
                     </x-dropdowns.item>
@@ -51,8 +54,8 @@
 
                     <form method="POST" action="/logout">
                         @csrf
-                        <button type="submit" class="group flex items-center gap-2 w-full text-left px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all duration-200 cursor-pointer">
-                            <img src="{{ asset('images/logout.svg') }}" class='w-4 h-4'>
+                        <button type="submit" class="group flex items-center gap-2 w-full text-left px-4 py-2.5 text-sm font-medium text-text-muted hover:bg-red-50 hover:text-red-500 rounded-lg transition-all duration-200 cursor-pointer">
+                            <x-lucide-log-out class='w-4 h-4' />
                             <span>Log Out</span>
                         </button>
                     </form>

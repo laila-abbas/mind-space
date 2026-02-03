@@ -9,8 +9,8 @@
     ];
 @endphp
 {{-- @checked would be overriden if used with alpine x-model --}}
-<label class='flex items-center p-4 bg-white border border-primary rounded-xl cursor-pointer hover:border-secondary'>
+<label class='flex items-center p-4 bg-bg-surface border border-brand rounded-xl cursor-pointer hover:border-brand-hover'>
     <input type='hidden' name='{{ $name }}' value='0'>
-    <input {{ $attributes($defaults) }} @checked(old($name)) class='h-5 w-5 rounded-lg mr-3 accent-secondary'>
+    <input {{ $attributes($defaults) }} @checked(old($name)) class='h-5 w-5 rounded-lg mr-3 accent-brand-hover'>
     <span class='font-bold'>{{ $label }}</span>
 </label>

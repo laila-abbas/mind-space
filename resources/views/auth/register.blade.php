@@ -55,12 +55,7 @@
                 placeholder='Re-enter your password'
                 x-model="passwordConfirmation" 
             />
-            <p
-                x-show="password && passwordConfirmation && password !== passwordConfirmation"
-                class="text-sm text-red-500 mt-1 ml-3"
-            >
-                Passwords do not match
-            </p>
+            <x-forms.password-mismatch />
         </div>
 
         <x-forms.checkbox 

@@ -13,7 +13,7 @@
         x-show="open" 
         @click.outside="open = false"
         x-transition
-        class="absolute mt-2 {{ $align === 'right' ? 'right-0' : 'left-0' }} {{ $width }} bg-white rounded-xl shadow-2xl py-2 px-2 z-50"
+        class="absolute mt-2 {{ $align === 'right' ? 'right-0' : 'left-0' }} {{ $width }} bg-bg-surface rounded-xl shadow-2xl py-2 px-2 z-50"
     >
         {{ $slot }}
     </div>

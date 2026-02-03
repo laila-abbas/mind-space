@@ -1,7 +1,7 @@
 @props(['name', 'label', 'asterisk' => false])
 
 <div class="inline-flex items-center gap-x-2">
-    <span class="w-2 h-2 bg-accent inline-block"></span>
+    <span class="w-2 h-2 bg-brand-accent-2 dark:bg-brand-accent inline-block"></span>
     <label class="font-bold" for="{{ $name }}">
         {{ $label }}
     

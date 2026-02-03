@@ -5,8 +5,10 @@
         'type' => 'text',
         'id' => $name,
         'name' => $name,
-        'class' => 'rounded-xl bg-white border border-primary px-5 py-4 w-full 
-                    focus:ring-2 focus:ring-secondary focus:ring-opacity-30 outline-none',
+        'class' => 'rounded-xl bg-bg-surface border border-brand px-5 py-4 w-full 
+                    focus:ring-2 focus:ring-brand-hover focus:ring-opacity-30 outline-none
+                    placeholder:text-text-muted placeholder:opacity-50
+                    dark:placeholder:text-text-subtle dark:placeholder:opacity-100',
         'value' => old($name),
         'placeholder' => $label,
     ];
@@ -48,17 +50,17 @@
                     class="absolute inset-y-0 right-4 cursor-pointer"
                     tabindex="-1" {{-- tab key won't focus on it --}}
                 >
-                    <img 
-                        x-show="!show" 
-                        x-cloak src="{{ asset('icons/eye-show.svg') }}" 
-                        class="w-5 h-5"
-                    >
-                    <img 
-                        x-show="show" 
-                        x-cloak 
-                        src="{{ asset('icons/eye-hide.svg') }}" 
-                        class="w-5 h-5"
-                    >
+                    <x-lucide-eye
+                        x-show="!show"
+                        x-cloak
+                        class="w-5 h-5 text-text-muted dark:text-text-main transition-colors"
+                    />
+
+                    <x-lucide-eye-off
+                        x-show="show"
+                        x-cloak
+                        class="w-5 h-5 text-text-muted dark:text-text-main transition-colors"
+                    />
                 </button>
             </div>
 

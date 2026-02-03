@@ -9,7 +9,7 @@
         'default' => 'bg-gray-100 text-gray-700'
     ];
 
-    $classes = $colors[$type] ?? $colors['default'];
+    $classes = $colors[$type];
     $alignment = $center ? 'text-center' : '';
 @endphp
 

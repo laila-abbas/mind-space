@@ -1,8 +1,8 @@
 @props(['href' => '#'])
 
-<a href="{{ $href }}" {{ $attributes->merge(['class' => 'flex items-center gap-2 px-4 py-2 text-sm font-medium text-text-700 hover:bg-primary/35 hover:text-secondary-600 rounded-lg hover:bg-primary transition-colors duration-200']) }}>
+<a href="{{ $href }}" {{ $attributes->merge(['class' => 'group flex items-center gap-2 px-4 py-2 text-sm font-medium text-text-muted hover:bg-brand-muted hover:text-brand-accent-2 rounded-lg transition-colors duration-200']) }}>
     @if (isset($icon))
-        <div class="w-4 h-4">
+        <div class="w-4 h-4 text-text-muted group-hover:text-brand-accent-2 transition-colors duration-200">
             {{ $icon }}
         </div>
     @endif

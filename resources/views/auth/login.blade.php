@@ -25,7 +25,7 @@
 
         <div class="flex justify-end -mt-2">
             <a :href="`{{ route('password.request') }}?email=${encodeURIComponent(email)}`"
-                class="text-sm text-text/70 transition hover:text-text hover:underline hover:text-text">
+                class="text-sm text-text-muted transition hover:text-text-main hover:underline">
                 Forgot password?
             </a>
         </div>

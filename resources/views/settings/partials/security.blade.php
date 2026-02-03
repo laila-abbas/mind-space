@@ -1,8 +1,8 @@
 <section class="space-y-6">
-    <header>
-        <h2 class="text-2xl font-bold text-gray-900">Security</h2>
-        <p class="mt-1 text-sm text-gray-600">Ensure your account is using a long, random password to stay secure.</p>
-    </header>
+    
+    <x-section-header description="Ensure your account is using a long, random password to stay secure.">
+        Security
+    </x-section-header>
 
     <x-forms.form 
         method="PATCH" 
@@ -20,7 +20,8 @@
                 type="password" 
                 autocomplete="current-password"
                 class="max-w-lg"
-                :errorBag="'updatePassword'" 
+                :errorBag="'updatePassword'"
+                required 
             />
 
             <x-forms.input 
@@ -31,7 +32,8 @@
                 class="max-w-lg"
                 strength
                 x-model="password"
-                :errorBag="'updatePassword'"  
+                :errorBag="'updatePassword'" 
+                required 
             />
 
             <div>
@@ -43,25 +45,22 @@
                     class="max-w-lg"
                     x-model="passwordConfirmation" 
                     :errorBag="'updatePassword'" 
+                    required
                 />
 
-                <p
-                        x-show="password && passwordConfirmation && password !== passwordConfirmation"
-                    class="text-sm text-red-500 mt-1 ml-3"
-                >
-                    Passwords do not match
-                </p>
+                <x-forms.password-mismatch />
             </div>
         </div>
 
+        <div class="flex pt-4">
         <div class="flex items-center gap-4 pt-4">
-            <button 
-                type="submit"
+            <x-forms.button 
                 x-bind:disabled="(password !== passwordConfirmation) 
                                 || (password.length > 0 && password.length < 8)" 
-                class="px-6 py-3 bg-primary text-text rounded-xl font-bold hover:bg-secondary transition-all cursor-pointer">
+                class="px-6 py-3">
                 Update Password
-            </button>
+            </x-forms.button>
+        </div>
         </div>
     </x-forms.form>
 </section>

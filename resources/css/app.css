@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import "cropperjs/dist/cropper.css";
 
+@variant dark (&:where(.dark, .dark *));
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -13,18 +15,278 @@
     --font-hanken-grotesk: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
     --text-2xs: 0.625rem; 
     
-    --color-background: #F5FAF6;
-    --color-primary: #c2e0cb;
-    --color-secondary: #93cc9f;
-    --color-third: #5e9e6c;
-    --color-accent: #303030;
-    --color-text: #1f2933;
-    --color-dark: #0a8c44;
+    /* surfaces + layouts */
+    --color-bg-page: #F5FAF6;
+    --color-bg-surface: #ffffff;
+    --color-bg-muted: #f3f4f6;
+    --color-bg-divider: #e5e7eb;
+    --color-bg-overlay: rgba(0,0,0,.5);
+
+    /* text hierarchy */
+    --color-text-main: #1f2933;
+    --color-text-strong: #111827;
+    --color-text-muted: #4b5563;
+    --color-text-subtle: #6b7280;
+
+    /* brand */
+    --color-brand: #c2e0cb;
+    --color-brand-hover: #93cc9f;
+    --color-brand-muted: #e6f2ea;
+    --color-brand-soft: rgba(194,224,203,.15);
+    --color-brand-accent: #5e9e6c;
+    --color-brand-accent-2: #303030;
+
+    /* borders */
+     --color-border-default: #e5e7eb;
+    --color-border-soft: rgba(0,0,0,.1);
+    --color-border-subtle: #f3f4f6;
+    --color-border-brand-soft: rgba(194,224,203,.5);
 }
 
+.ocean-light {
+  --color-bg-page: #f0f9fa;
+  --color-bg-surface: #ffffff;
+  --color-bg-muted: #e6f2f5;
+  --color-bg-divider: #d9e6eb;
+  --color-bg-overlay: rgba(0,0,0,0.5);
+
+  --color-text-main: #1f3a3f;
+  --color-text-strong: #0d1f24;
+  --color-text-muted: #4b6b70;
+  --color-text-subtle: #6b8a90;
+
+  --color-brand: #7dd3fc;
+  --color-brand-hover: #38bdf8;
+  --color-brand-muted: #e0f2fe;
+  --color-brand-soft: rgba(125,211,252,.15);
+  --color-brand-accent: #0284c7;
+  --color-brand-accent-2: #035388;
+
+  --color-border-default: #d9e6eb;
+  --color-border-soft: rgba(0,0,0,.1);
+  --color-border-subtle: #e6f2f5;
+  --color-border-brand-soft: rgba(125,211,252,.5);
+}
+
+.sunset-light {
+  --color-bg-page: #fff6f5;
+  --color-bg-surface: #ffffff;
+  --color-bg-muted: #fdf0ef;
+  --color-bg-divider: #f5dede;
+  --color-bg-overlay: rgba(0,0,0,0.5);
+
+  --color-text-main: #3a1f1f;
+  --color-text-strong: #1f0d0d;
+  --color-text-muted: #7a4b4b;
+  --color-text-subtle: #a36b6b;
+
+  --color-brand: #fca5a5;
+  --color-brand-hover: #f87171;
+  --color-brand-muted: #fee2e2;
+  --color-brand-soft: rgba(252,165,165,.15);
+  --color-brand-accent: #dc2626;
+  --color-brand-accent-2: #7f1d1d;
+
+  --color-border-default: #f5dede;
+  --color-border-soft: rgba(0,0,0,.1);
+  --color-border-subtle: #fde2e2;
+  --color-border-brand-soft: rgba(252,165,165,.5);
+}
+
+.woodland {
+  --color-bg-page: #fdfaf5;
+  --color-bg-surface: #ffffff;
+  --color-bg-muted: #f2ede4;
+  --color-bg-divider: #e0d6c8;
+  --color-bg-overlay: rgba(60, 40, 30, 0.4);
+
+  --color-text-main: #4a3728;
+  --color-text-strong: #2d1e12;
+  --color-text-muted: #7c6a5a;
+  --color-text-subtle: #a69382;
+
+  --color-brand: #8b5e3c; /* Warm Wood */
+  --color-brand-hover: #a0714f;
+  --color-brand-muted: #f5ece3;
+  --color-brand-soft: rgba(139, 94, 60, 0.1);
+  --color-brand-accent: #6d4c33;
+  --color-brand-accent-2: #3e2716;
+
+  --color-border-default: #e0d6c8;
+  --color-border-soft: rgba(139, 94, 60, 0.1);
+  --color-border-subtle: #f2ede4;
+  --color-border-brand-soft: rgba(139, 94, 60, 0.3);
+}
+
+.midnight {
+  --color-bg-page: #020617;
+  --color-bg-surface: #0f172a;
+  --color-bg-muted: #1e293b;
+  --color-bg-divider: #334155;
+  --color-bg-overlay: rgba(0, 0, 0, 0.8);
+
+  --color-text-main: #cbd5e1;
+  --color-text-strong: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-text-subtle: #64748b;
+
+  --color-brand: #38bdf8;
+  --color-brand-hover: #7dd3fc;
+  --color-brand-muted: #0c4a6e;
+  --color-brand-soft: rgba(56, 189, 248, 0.15);
+  --color-brand-accent: #0ea5e9;
+  --color-brand-accent-2: #e0f2fe;
+
+  --color-border-default: #334155;
+  --color-border-soft: rgba(255, 255, 255, 0.05);
+  --color-border-subtle: #1e293b;
+  --color-border-brand-soft: rgba(56, 189, 248, 0.3);
+}
+
+.lavender {
+  --color-bg-page: #f9f8ff;
+  --color-bg-surface: #ffffff;
+  --color-bg-muted: #f0effc;
+  --color-bg-divider: #e2e0f7;
+  --color-bg-overlay: rgba(88, 80, 236, 0.3);
+
+  --color-text-main: #3730a3;
+  --color-text-strong: #1e1b4b;
+  --color-text-muted: #667eea;
+  --color-text-subtle: #a5b4fc;
+
+  --color-brand: #818cf8;
+  --color-brand-hover: #6366f1;
+  --color-brand-muted: #eef2ff;
+  --color-brand-soft: rgba(129, 140, 248, 0.1);
+  --color-brand-accent: #4f46e5;
+  --color-brand-accent-2: #312e81;
+
+  --color-border-default: #e2e0f7;
+  --color-border-soft: rgba(129, 140, 248, 0.1);
+  --color-border-subtle: #f0effc;
+  --color-border-brand-soft: rgba(129, 140, 248, 0.4);
+}
+
+.cyberpunk {
+  --color-bg-page: #000000;
+  --color-bg-surface: #0d0d0d;
+  --color-bg-muted: #1a1a1a;
+  --color-bg-divider: #333333;
+  --color-bg-overlay: rgba(255, 0, 255, 0.2);
+
+  --color-text-main: #00ff9f; 
+  --color-text-strong: #ffffff;
+  --color-text-muted: #008f5a;
+  --color-text-subtle: #4d4d4d;
+
+  --color-brand: #ff00ff;
+  --color-brand-hover: #ff66ff;
+  --color-brand-muted: #330033;
+  --color-brand-soft: rgba(255, 0, 255, 0.15);
+  --color-brand-accent: #00ff9f;
+  --color-brand-accent-2: #7df9ff;
+
+  --color-border-default: #333;
+  --color-border-soft: rgba(255, 255, 255, 0.1);
+  --color-border-subtle: #111;
+  --color-border-brand-soft: rgba(255, 0, 255, 0.5);
+}
+
+.espresso {
+  /* surfaces + layouts */
+  --color-bg-page: #181210;
+  --color-bg-surface: #211a17;
+  --color-bg-muted: #2a211d;
+  --color-bg-divider: #3a2e29;
+  --color-bg-overlay: rgba(0, 0, 0, 0.65);
+
+  /* text hierarchy */
+  --color-text-main: #e6dbd5;     
+  --color-text-strong: #f5efe9;   
+  --color-text-muted: #b8a89f;    
+  --color-text-subtle: #8b6f63;   
+
+  /* brand */
+  --color-brand: #c7a27c;         
+  --color-brand-hover: #d8b892;
+  --color-brand-muted: #3a2a23;
+  --color-brand-soft: rgba(199, 162, 124, 0.12);
+  --color-brand-accent: #8b5a3c;  
+  --color-brand-accent-2: #f1e6d8;
+
+  /* borders */
+  --color-border-default: #3a2e29;
+  --color-border-soft: rgba(255, 255, 255, 0.06);
+  --color-border-subtle: #241b18;
+  --color-border-brand-soft: rgba(199, 162, 124, 0.35);
+}
+
+.parchment {
+  /* surfaces + layouts */
+  --color-bg-page: #faf7f2;
+  --color-bg-surface: #ffffff;
+  --color-bg-muted: #f1ede6;
+  --color-bg-divider: #e3ddd4;
+  --color-bg-overlay: rgba(60, 50, 40, 0.4);
+
+  /* text hierarchy */
+  --color-text-main: #3a332c;
+  --color-text-strong: #1f1b17;
+  --color-text-muted: #6b5f54;
+  --color-text-subtle: #9a8f84;
+
+  /* brand */
+  --color-brand: #c4b49a;          
+  --color-brand-hover: #b3a285;
+  --color-brand-muted: #f4efe7;
+  --color-brand-soft: rgba(196, 180, 154, 0.15);
+
+  --color-brand-accent: #7a5a3a;  
+  --color-brand-accent-2: #2f261e; 
+
+  /* borders */
+  --color-border-default: #e3ddd4;
+  --color-border-soft: rgba(0, 0, 0, 0.06);
+  --color-border-subtle: #f1ede6;
+  --color-border-brand-soft: rgba(196, 180, 154, 0.4);
+}
+
+.dark {
+    /* surfaces + layouts */
+    --color-bg-page: #121513;        
+    --color-bg-surface: #1a1f1c;     
+    --color-bg-muted: #242b27;       
+    --color-bg-divider: #2d3630;
+    --color-bg-overlay: rgba(0,0,0,.75);
+    
+    /* text hierarchy */
+    --color-text-main: #d1d5db;     
+    --color-text-strong: #f0fdf4;    
+    --color-text-muted: #94a3b8;
+    --color-text-subtle: #64748b;
+
+    /* brand */
+    --color-brand: #5e9e6c;          
+    --color-brand-hover: #7db88a;
+    --color-brand-soft: rgba(94, 158, 108, 0.15);
+    --color-brand-accent: #a7d9b5;   
+
+    /* borders */
+    --color-border-default: #2d3630;
+    --color-border-soft: rgba(255,255,255,.05);
+    --color-border-subtle: #1f2521;
+    --color-border-brand-soft: rgba(94, 158, 108, 0.3);
+}
+
+/* overrides the default yellow/blue background Chrome/Safari apply when autofilling */
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
     -webkit-text-fill-color: #1f2933;
+}
+.dark input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px var(--color-bg-surface) inset;
+    -webkit-text-fill-color: var(--color-text-main);
 }
 
 
@@ -36,3 +298,7 @@ input:-webkit-autofill {
     }
 }
 
+/* alpine would be loaded before html is complete */
+[x-cloak] {
+    display: none !important;
+}

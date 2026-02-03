@@ -3,7 +3,7 @@
         
         <h1 class="text-xl font-semibold mb-4">Verify your email address</h1>
 
-        <p class="text-gray-600 mb-6">
+        <p class="text-text-muted mb-6">
             Thanks for signing up! Before getting started, please verify your email address
             by clicking on the link we just emailed to you.
         </p>
@@ -25,7 +25,7 @@
 
                 <button
                     type="submit"
-                    class="text-sm text-gray-500 hover:text-gray-700 underline cursor-pointer"
+                    class="text-sm text-text-subtle hover:text-text-strong underline cursor-pointer"
                 >
                     Log out
                 </button>
