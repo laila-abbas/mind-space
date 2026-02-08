@@ -6,5 +6,5 @@
     role="alert"
     aria-live="polite"
 >
-    Passwords do not match
+    {{ __('passwords.mismatch') }}
 </p>

@@ -33,6 +33,10 @@ class CreateNewUser implements CreatesNewUsers
                 // Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
+            'is_author' => ['nullable', 'boolean'],
+            'pen_name' => ['nullable', 'string', 'max:255'],
+            'biography' => ['nullable', 'string'],
+            'website_url' => ['nullable', 'url'],
         ])->validate();
 
         $existingUser = User::where('email', $input['email'])->first();

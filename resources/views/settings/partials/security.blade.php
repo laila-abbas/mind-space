@@ -1,7 +1,7 @@
 <section class="space-y-6">
     
-    <x-section-header description="Ensure your account is using a long, random password to stay secure.">
-        Security
+    <x-section-header description="{{ __('passwords.password_security_hint') }}">
+        {{ __('settings.security') }}
     </x-section-header>
 
     <x-forms.form 
@@ -15,7 +15,7 @@
     >
         <div class="space-y-6">
             <x-forms.input 
-                label="Current Password" 
+                label="{{ __('passwords.current_password') }}" 
                 name="current_password" 
                 type="password" 
                 autocomplete="current-password"
@@ -25,7 +25,7 @@
             />
 
             <x-forms.input 
-                label="New Password" 
+                label="{{ __('passwords.new_password') }}" 
                 name="password" 
                 type="password" 
                 autocomplete="new-password"
@@ -38,7 +38,7 @@
 
             <div>
                 <x-forms.input 
-                    label="Confirm Password" 
+                    label="{{ __('passwords.password_confirmation') }}" 
                     name="password_confirmation" 
                     type="password" 
                     autocomplete="new-password"
@@ -46,6 +46,7 @@
                     x-model="passwordConfirmation" 
                     :errorBag="'updatePassword'" 
                     required
+                    placeholder="{{ __('passwords.reenter_password') }}"
                 />
 
                 <x-forms.password-mismatch />
@@ -58,7 +59,7 @@
                 x-bind:disabled="(password !== passwordConfirmation) 
                                 || (password.length > 0 && password.length < 8)" 
                 class="px-6 py-3">
-                Update Password
+                {{ __('passwords.update_password') }}
             </x-forms.button>
         </div>
         </div>

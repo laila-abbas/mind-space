@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LocaleController;
 
 
 Route::get('/', function () {
@@ -44,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::patch('/settings/info', [ProfileController::class, 'updateInfo'])->name('profile.updateInfo');
     
-    Route::patch('/settings/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
-    
+    Route::patch('/settings/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');   
 });
+
+Route::post('/locale', [LocaleController::class, 'set'])->name('locale.set');

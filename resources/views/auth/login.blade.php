@@ -1,6 +1,6 @@
 <x-layout>
     
-    <x-page-heading>Welcome back!</x-page-heading>
+    <x-page-heading>{{ __('auth.welcome_back') }}</x-page-heading>
     
     <x-forms.form 
         method='POST' 
@@ -9,7 +9,7 @@
     >
     
         <x-forms.input 
-            label='Email' 
+            label="{{ __('auth.email') }}" 
             name='email' 
             type='email' 
             x-model="email" 
@@ -17,7 +17,7 @@
         />
 
         <x-forms.input 
-            label='Password' 
+            label="{{ __('passwords.password') }}" 
             name='password' 
             type='password' 
             required
@@ -26,11 +26,11 @@
         <div class="flex justify-end -mt-2">
             <a :href="`{{ route('password.request') }}?email=${encodeURIComponent(email)}`"
                 class="text-sm text-text-muted transition hover:text-text-main hover:underline">
-                Forgot password?
+                {{ __('passwords.forgot_password') }}
             </a>
         </div>
 
-        <x-forms.button>Log In</x-forms.button>
+        <x-forms.button>{{ __('auth.login') }}</x-forms.button>
 
     </x-forms.form>
 </x-layout>

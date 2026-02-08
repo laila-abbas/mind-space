@@ -47,7 +47,7 @@
                 <button
                     type="button"
                     @click="show = !show"
-                    class="absolute inset-y-0 right-4 cursor-pointer"
+                    class="absolute inset-y-0 end-4 cursor-pointer"
                     tabindex="-1" {{-- tab key won't focus on it --}}
                 >
                     <x-lucide-eye
@@ -70,13 +70,13 @@
                     class="text-sm mt-1 ml-3"
                 >
                     <span x-show="!longEnough()" class="text-red-500">
-                        Password must be at least 8 characters
+                        {{ __('passwords.min_length') }}
                     </span>
                     <span
                         x-show="longEnough() && (!(hasLower() || hasUpper()) || !hasNumber())"
                         class="text-red-500"
                     >
-                        Weak - use characters, letters, and numbers
+                        {{ __('passwords.strength_weak') }}
                     </span>
                     <span
                         x-show="
@@ -87,7 +87,7 @@
                         "
                         class="text-yellow-500"
                     >
-                        Medium - add symbols and mixed case
+                        {{ __('passwords.strength_medium') }}
                     </span>
                     <span
                         x-show="
@@ -99,7 +99,7 @@
                         "
                         class="text-green-500"
                     >
-                        Strong - meets recommended strength
+                        {{ __('passwords.strength_strong') }}
                     </span>
                 </div>
             @endif

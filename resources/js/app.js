@@ -37,6 +37,30 @@ Alpine.store('theme', {
     }
 })
 
+Alpine.store('locale', {
+    current: document.documentElement.lang || 'en',
 
+    async set(locale) {
+        if (this.current === locale) return
+
+        this.current = locale
+        localStorage.setItem('locale', locale)
+
+        document.documentElement.lang = locale
+        document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr'
+
+        await fetch('/locale', {
+            method: 'POST',
+            headers: {
+                'X-Locale': localStorage.getItem('locale'),
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            },
+            body: JSON.stringify({ locale }),
+        })
+
+        window.location.reload()
+    },
+})
 
 Alpine.start()

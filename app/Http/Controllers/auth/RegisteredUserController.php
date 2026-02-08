@@ -20,7 +20,7 @@ class RegisteredUserController extends FortifyRegisteredUserController
 
         if (RateLimiter::tooManyAttempts('register|' . $throttleKey, 5)) {
             throw ValidationException::withMessages([
-                'email' => __('Too many attempts. Please try again in a minute.'),
+                'email' => __('auth.too_many_attempts'),
             ]);
         }
 

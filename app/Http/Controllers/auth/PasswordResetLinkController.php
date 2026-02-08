@@ -19,7 +19,7 @@ class PasswordResetLinkController extends Controller
 
         if (RateLimiter::tooManyAttempts('password-reset|' . $throttleKey, 5)) {
             throw ValidationException::withMessages([
-                'email' => __('Too many attempts. Please try again in a minute.'),
+                'email' => __('auth.too_many_attempts'),
             ]);
         }
 
@@ -31,6 +31,6 @@ class PasswordResetLinkController extends Controller
             return back()->with('status', __($status));
         }
 
-        return back()->with('status', __('We have emailed your password reset link.'));
+        return back()->with('status', __('auth.password_reset_link_sent'));
     }
 }

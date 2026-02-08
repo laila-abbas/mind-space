@@ -1,7 +1,7 @@
 <x-layout>
     <x-section-card center class='max-w-md'>
             
-        <h1 class="text-xl font-semibold mb-6 text-center">Reset your password</h1>
+        <h1 class="text-xl font-semibold mb-6 text-center">{{ __('passwords.reset_your_password') }}</h1>
 
         <x-alert />
 
@@ -21,7 +21,7 @@
             />
             
             <x-forms.input 
-                label="Email" 
+                label="{{ __('auth.email') }}" 
                 name="email" 
                 type="email" 
                 :value="request('email')" 
@@ -29,7 +29,7 @@
             />
 
             <x-forms.input 
-                label="New Password" 
+                label="{{ __('passwords.new_password') }}"
                 name="password" 
                 type="password" 
                 required 
@@ -39,10 +39,11 @@
 
             <div>
                 <x-forms.input 
-                    label="Confirm Password" 
+                    label="{{ __('passwords.password_confirmation') }}" 
                     name="password_confirmation" 
                     type="password" 
                     required 
+                    placeholder="{{ __('passwords.reenter_password') }}"
                     x-model="passwordConfirmation"
                 />
 
@@ -53,7 +54,7 @@
                 x-bind:disabled="(password !== passwordConfirmation) 
                                 || (password.length > 0 && password.length < 8)"
             >
-                Reset Password
+                {{ __('passwords.reset_password') }}
             </x-forms.button>
 
         </x-forms.form>

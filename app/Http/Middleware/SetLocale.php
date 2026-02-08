@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+
+class SetLocale
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+        $user = Auth::user();
+
+        $locale = $user->locale // to presist across multiple devices (logged-in users)
+                ?? $request->cookie('locale') // to persists across page reloads, browser restarts, and logouts
+                ?? $request->getPreferredLanguage(['en', 'ar']) // browser lang for first time visitors
+                ?? config('app.locale'); // fallback if nothing is known
+
+        App::setLocale($locale);
+
+        return $next($request);
+    }
+}

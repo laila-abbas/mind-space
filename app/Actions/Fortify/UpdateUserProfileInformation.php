@@ -29,6 +29,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 Rule::unique('users')->ignore($user->id),
             ],
             'cropped_avatar' => ['nullable', 'string'],
+            'pen_name' => ['nullable', 'string', 'max:255'],
+            'biography' => ['nullable', 'string'],
+            'website_url' => ['nullable', 'url'],
         ], [
             'email.unique' => 'Unable to update email address.',
         ])->validateWithBag('updateProfileInformation');

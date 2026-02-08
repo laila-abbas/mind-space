@@ -1,6 +1,6 @@
 <x-layout>
     
-    <x-page-heading>Register</x-page-heading>
+    <x-page-heading>{{ __('auth.register') }}</x-page-heading>
     
     <x-alert type="error" />
 
@@ -15,20 +15,20 @@
     >
     
         <x-forms.input 
-            label='First Name' 
+            label="{{ __('auth.first_name') }}" 
             name='first_name' 
             asterisk 
             required 
         />
 
         <x-forms.input 
-            label='Last Name' 
+            label="{{ __('auth.last_name') }}"
             name='last_name' 
-            placeholder="Last Name (Optional)" 
+            placeholder="{{ __('auth.last_name_hint') }}" 
         />
 
         <x-forms.input 
-            label='Email' 
+            label="{{ __('auth.email') }}"
             name='email' 
             type='email' 
             asterisk 
@@ -36,7 +36,7 @@
         />
 
         <x-forms.input 
-            label='Password' 
+            label="{{ __('passwords.password') }}" 
             name='password' 
             type='password' 
             asterisk 
@@ -47,12 +47,12 @@
 
         <div>
             <x-forms.input 
-                label='Password Confirmation' 
+                label="{{ __('passwords.password_confirmation') }}"
                 name='password_confirmation' 
                 type='password' 
                 asterisk 
                 required 
-                placeholder='Re-enter your password'
+                placeholder="{{ __('passwords.reenter_password') }}"
                 x-model="passwordConfirmation" 
             />
             <x-forms.password-mismatch />
@@ -60,7 +60,7 @@
 
         <x-forms.checkbox 
             name='is_author' 
-            label='Sign up as an Author' 
+            label="{{ __('auth.sign_up_author') }}"
             x-model='isAuthor' 
         />
 
@@ -71,23 +71,23 @@
         >
 
             <x-forms.input 
-                label='Pen Name' 
+                label="{{ __('auth.pen_name') }}"
                 name='pen_name' 
-                placeholder='How your name appears on books (Optional)' 
+                placeholder="{{ __('auth.pen_name_hint') }}"
             />
 
             <x-forms.input 
-                label='Biography' 
+                label="{{ __('auth.biography') }}" 
                 name='biography' 
                 type='textarea' 
-                placeholder='Biography... (Optional)' 
+                placeholder="{{ __('auth.biography_hint') }}"
             />
 
             <x-forms.input 
-                label='Personal Website' 
+                label="{{ __('auth.personal_website') }}"
                 name='website_url' 
                 type='url' 
-                placeholder='https://... (Optional)' 
+                placeholder="{{ __('auth.website_hint') }}"
             />
         </div>
 
@@ -95,7 +95,7 @@
             x-bind:disabled="(password !== passwordConfirmation) 
                             || (password.length > 0 && password.length < 8)"
         >
-            Create Account
+            {{ __('auth.create_account') }}
         </x-forms.button>
 
     </x-forms.form>

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}"
+      dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}"
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mind Space</title>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,11 +26,11 @@
             </div>
 
             <div class='space-x-10 font-bold'>
-                <a href="#">Home</a>
-                <a href="#">Books</a>
-                <a href="#">Authors</a>
-                <a href="#">Categories</a>
-                <a href="#">Publishing Houses</a>
+                <a href="#">{{ __('home.home') }}</a>
+                <a href="#">{{ __('home.books') }}</a>
+                <a href="#">{{ __('home.authors') }}</a>
+                <a href="#">{{ __('home.categories') }}</a>
+                <a href="#">{{ __('home.publishing_houses') }}</a>
             </div>
 
             @auth
@@ -45,18 +49,18 @@
                         <x-slot name="icon">
                             <x-lucide-settings />
                         </x-slot>
-                        Settings
+                        {{ __('home.settings') }}
                     </x-dropdowns.item>
                     
                     @can('submit book for publishing')
-                        <x-dropdowns.item href="/books/create">Add a Book</x-dropdowns.item>
+                        <x-dropdowns.item href="/books/create">{{ __('home.add_book') }}</x-dropdowns.item>
                     @endcan
 
                     <form method="POST" action="/logout">
                         @csrf
                         <button type="submit" class="group flex items-center gap-2 w-full text-left px-4 py-2.5 text-sm font-medium text-text-muted hover:bg-red-50 hover:text-red-500 rounded-lg transition-all duration-200 cursor-pointer">
                             <x-lucide-log-out class='w-4 h-4' />
-                            <span>Log Out</span>
+                            <span>{{ __('home.logout') }}</span>
                         </button>
                     </form>
                     
@@ -65,8 +69,8 @@
 
             @guest
                 <div class='space-x-6 font-bold'>
-                    <a href={{ route('register') }}>Sign Up</a>
-                    <a href={{ route('login') }}>Log In</a>
+                    <a href={{ route('register') }}>{{ __('home.signup') }}</a>
+                    <a href={{ route('login') }}>{{ __('home.login') }}</a>
                 </div>
             @endguest
         </nav>

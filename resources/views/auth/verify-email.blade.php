@@ -1,15 +1,12 @@
 <x-layout>
     <x-section-card center class='text-center max-w-xl'>
         
-        <h1 class="text-xl font-semibold mb-4">Verify your email address</h1>
+        <h1 class="text-xl font-semibold mb-4">{{ __('auth.verify_email') }}</h1>
 
-        <p class="text-text-muted mb-6">
-            Thanks for signing up! Before getting started, please verify your email address
-            by clicking on the link we just emailed to you.
-        </p>
+        <p class="text-text-muted mb-6">{{ __('auth.verify_email_notice') }}</p>
 
         <x-alert  
-            message="A new verification link has been sent to your email address." 
+            message="{{ __('auth.verification_link_sent') }}" 
             :show="session('status') === 'verification-link-sent'" 
         />
 
@@ -17,7 +14,7 @@
             <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
 
-                <x-forms.button>Resend Verification Email</x-forms.button>
+                <x-forms.button>{{ __('auth.resend_verification') }}</x-forms.button>
             </form>
 
             <form method="POST" action="{{ route('logout') }}">
@@ -27,7 +24,7 @@
                     type="submit"
                     class="text-sm text-text-subtle hover:text-text-strong underline cursor-pointer"
                 >
-                    Log out
+                    {{ __('home.logout') }}
                 </button>
             </form>
         </div>

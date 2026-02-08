@@ -17,13 +17,12 @@ class ProfileController extends Controller
     public function updateInfo(Request $request,  UpdatesUserProfileInformation $updater) {
         $updater->update($request->user(), $request->all());
 
-        return back()->with('status', 'profile-updated');
+        return back()->with('status', __('settings.account_updated'));
     }
 
     public function updatePassword(Request $request, UpdatesUserPasswords $updater) {
         $updater->update($request->user(), $request->all());
 
-        return redirect()->to(route('profile.edit') . '#security')
-                 ->with('status', 'password-updated');
+        return back()->with('status', __('passwords.password_changed'));
     }
 }
