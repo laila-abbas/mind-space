@@ -44,7 +44,7 @@
                     <button
                         type="button"
                         @click="$refs.fileInput.click()"
-                        class="cursor-pointer text-sm mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-brand-hover text-bg-surface hover:bg-brand-accent cursor-pointer transition-all"
+                        class="text-sm mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-brand-hover text-bg-surface hover:bg-brand-accent cursor-pointer transition-all"
                     >
                         {{ __('settings.choose_photo') }}
                     </button>

@@ -49,3 +49,12 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('/locale', [LocaleController::class, 'set'])->name('locale.set');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::delete('/account', [ProfileController::class, 'destroy'])
+        ->name('account.destroy');
+});
+
+Route::get('/account/restore/{user}', [ProfileController::class, 'restore'])
+    ->name('account.restore')
+    ->middleware('signed'); // add a secret key (only the button in the email would work)

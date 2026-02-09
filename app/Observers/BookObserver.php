@@ -31,7 +31,7 @@ class BookObserver
             return;
         }
 
-        $book->editions?->each->delete();
+        $book->editions->each->delete();
     }
 
     /**

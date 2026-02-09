@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Models\User;
 use App\Models\Author;
+use App\Notifications\RestoreAccountNotification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -39,9 +40,14 @@ class CreateNewUser implements CreatesNewUsers
             'website_url' => ['nullable', 'url'],
         ])->validate();
 
-        $existingUser = User::where('email', $input['email'])->first();
+        $existingUser = User::withTrashed()->where('email', $input['email'])->first();
 
         if ($existingUser) {
+            if ($existingUser->trashed()) {
+                // account was deleted intentionally
+                $existingUser->notify(new RestoreAccountNotification());
+                return null;
+            }
             $existingUser->notify(new AlreadyHaveAccount());
             return null;
         }

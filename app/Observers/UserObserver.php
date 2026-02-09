@@ -39,7 +39,7 @@ class UserObserver
      */
     public function restored(User $user): void
     {
-        $user->author()->withTrashed()->get()->each->restore();
+        $user->author()->withTrashed()->first()?->restore();
     }
 
     /**
@@ -47,6 +47,8 @@ class UserObserver
      */
     public function forceDeleted(User $user): void
     {
-        $user->author()->withTrashed()->get()->each->forceDelete();
+        if ($author = $user->author()->withTrashed()->first()) {
+            $author->forceDelete();
+        }
     }
 }

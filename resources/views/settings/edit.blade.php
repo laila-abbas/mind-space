@@ -49,5 +49,11 @@
             @include('settings.partials.preferences')
         </x-section-card>
 
+        <x-forms.divider />
+
+        <x-section-card class='bg-red-50 border-red-400 hover:border-red-500'>
+            @include('settings.partials.danger-zone')
+        </x-section-card>
+
     </div>
 </x-layout>

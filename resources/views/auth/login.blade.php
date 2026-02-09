@@ -1,5 +1,11 @@
 <x-layout>
     
+    @if(session('status'))
+        <div>
+            <x-alert />
+        </div>
+    @endif
+
     <x-page-heading>{{ __('auth.welcome_back') }}</x-page-heading>
     
     <x-forms.form 

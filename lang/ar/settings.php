@@ -44,4 +44,13 @@ return [
     'cyberpunk' => 'سايبربانك',
     'espresso' => 'إسبريسو',
 
+    // danger zone
+    'danger_zone' => 'منطقة خطر',
+    'danger_zone_desc' => 'تتضمن هذه المنطقة إجراءات مهمة قد تؤثر على حسابك وبياناتك. يرجى التأكد قبل المتابعة.',
+    'delete_account' => 'حذف الحساب',
+    'delete_account_desc' => 'سيتم تعطيل حسابك فورًا، ويمكنك استعادته خلال 14 يومًا في أي وقت خلال هذه الفترة عن طريق تسجيل الدخول مرة أخرى.',
+    'delete_account_button' => 'حذف حسابي',
+    'delete_account_confirm_title' => 'هل أنت متأكد؟',
+    'delete_account_confirm_text' => 'سيتم تعطيل حسابك وجدولته للحذف النهائي بعد 14 يومًا.',
+    'delete_account_confirm_button' => 'احذف حسابي',
 ];

@@ -44,4 +44,13 @@ return [
     'cyberpunk' => 'Cyberpunk',
     'espresso' => 'Espresso',
 
+    // danger zone
+    'danger_zone' => 'Danger Zone',
+    'danger_zone_desc' => 'These actions can significantly affect your account and data. Please review carefully before continuing.',
+    'delete_account' => 'Delete Account',
+    'delete_account_desc' => 'Once your account is deleted, it will be deactivated immediately. You can restore it within 14 days at any time during this period by logging in again.',
+    'delete_account_button' => 'Delete my account',
+    'delete_account_confirm_title' => 'Are you sure?',
+    'delete_account_confirm_text' => 'Your account will be deactivated and scheduled for permanent deletion after 14 days.',
+    'delete_account_confirm_button' => 'Delete my account',
 ];

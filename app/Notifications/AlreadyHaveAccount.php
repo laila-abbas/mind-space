@@ -13,6 +13,7 @@ class AlreadyHaveAccount extends Notification implements ShouldQueue
 
     public function __construct()
     {
+        
     }
 
     public function via(mixed $notifiable): array
