@@ -20,6 +20,8 @@ return [
     'too_many_attempts' => 'Too many attempts. Please try again in a minute.',
     'welcome_back' => 'Welcome back!',
     'registration_error' => 'There was an error with your registration. Please try registering again.',
+    'account_deleted_notice' => 'Your account has been deleted. You can restore it within 14 days via the email we sent.',
+    'account_restored_success' => 'Your account has been restored successfully!',
 
     // fields
     'first_name' => 'First Name',

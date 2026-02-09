@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use App\Notifications\AlreadyHaveAccount;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 
 class CreateNewUser implements CreatesNewUsers
@@ -70,6 +71,10 @@ class CreateNewUser implements CreatesNewUsers
                 'biography' => $input['biography'],
                 'website_url' => $input['website_url'],
             ]);
+        }
+
+        if ($user instanceof MustVerifyEmail) {
+            $user->sendEmailVerificationNotification();
         }
 
         return $user;

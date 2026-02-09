@@ -47,7 +47,7 @@ class ProfileController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect('/login')->with('status', 'Your account has been deleted. You can restore it within 14 days via the email we sent.');
+        return redirect('/login')->with('status', __('auth.account_deleted_notice'));
     }
 
     public function restore($id)
@@ -61,6 +61,6 @@ class ProfileController extends Controller
 
         $user->restore(); // undo soft delete
 
-        return redirect('/login')->with('status', 'Your account has been restored successfully!');
+        return redirect('/login')->with('status', __('auth.account_restored_success'));
     }
 }
