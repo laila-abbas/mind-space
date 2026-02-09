@@ -8,11 +8,26 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+@font-face { font-family: 'Hanken Grotesk'; src: url('../fonts/hanken-grotesk/HankenGrotesk-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Hanken Grotesk'; src: url('../fonts/hanken-grotesk/HankenGrotesk-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Hanken Grotesk'; src: url('../fonts/hanken-grotesk/HankenGrotesk-SemiBold.ttf') format('truetype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Hanken Grotesk'; src: url('../fonts/hanken-grotesk/HankenGrotesk-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Cairo'; src: url('../fonts/cairo/Cairo-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Cairo'; src: url('../fonts/cairo/Cairo-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Cairo'; src: url('../fonts/cairo/Cairo-SemiBold.ttf') format('truetype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Cairo'; src: url('../fonts/cairo/Cairo-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+
+body { font-family: var(--font-sans); }
+.font-english { --font-sans: var(--font-hanken-grotesk); }
+.font-arabic { --font-sans: var(--font-cairo); }
+
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
     --color-black: #060606;
     --font-hanken-grotesk: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+    --font-cairo: 'Cairo', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: var(--font-hanken-grotesk);
     --text-2xs: 0.625rem; 
     
     /* surfaces + layouts */
@@ -67,7 +82,6 @@
   --color-border-subtle: #e6f2f5;
   --color-border-brand-soft: rgba(125,211,252,.5);
 }
-
 .sunset-light {
   --color-bg-page: #fff6f5;
   --color-bg-surface: #ffffff;
@@ -92,7 +106,6 @@
   --color-border-subtle: #fde2e2;
   --color-border-brand-soft: rgba(252,165,165,.5);
 }
-
 .woodland {
   --color-bg-page: #fdfaf5;
   --color-bg-surface: #ffffff;
@@ -117,7 +130,6 @@
   --color-border-subtle: #f2ede4;
   --color-border-brand-soft: rgba(139, 94, 60, 0.3);
 }
-
 .midnight {
   --color-bg-page: #020617;
   --color-bg-surface: #0f172a;
@@ -142,7 +154,6 @@
   --color-border-subtle: #1e293b;
   --color-border-brand-soft: rgba(56, 189, 248, 0.3);
 }
-
 .lavender {
   --color-bg-page: #f9f8ff;
   --color-bg-surface: #ffffff;
@@ -167,7 +178,6 @@
   --color-border-subtle: #f0effc;
   --color-border-brand-soft: rgba(129, 140, 248, 0.4);
 }
-
 .cyberpunk {
   --color-bg-page: #000000;
   --color-bg-surface: #0d0d0d;
@@ -192,7 +202,6 @@
   --color-border-subtle: #111;
   --color-border-brand-soft: rgba(255, 0, 255, 0.5);
 }
-
 .espresso {
   /* surfaces + layouts */
   --color-bg-page: #181210;
@@ -221,7 +230,6 @@
   --color-border-subtle: #241b18;
   --color-border-brand-soft: rgba(199, 162, 124, 0.35);
 }
-
 .parchment {
   /* surfaces + layouts */
   --color-bg-page: #faf7f2;
@@ -251,7 +259,6 @@
   --color-border-subtle: #f1ede6;
   --color-border-brand-soft: rgba(196, 180, 154, 0.4);
 }
-
 .dark {
     /* surfaces + layouts */
     --color-bg-page: #121513;        
@@ -288,8 +295,6 @@ input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px var(--color-bg-surface) inset;
     -webkit-text-fill-color: var(--color-text-main);
 }
-
-
 /* for Edge (injected eye in passwords) */
 @layer utilities {
     input[type="password"]::-ms-reveal,
@@ -298,7 +303,5 @@ input:-webkit-autofill {
     }
 }
 
-/* alpine would be loaded before html is complete */
-[x-cloak] {
-    display: none !important;
-}
+/* alpine wouldn't be loaded before html is complete */
+[x-cloak] { display: none !important; }

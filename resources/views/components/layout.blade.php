@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}"
       dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}"
+      class="{{ app()->getLocale() === 'ar' ? 'font-arabic' : 'font-english' }}"
 >
 <head>
     <meta charset="UTF-8">
@@ -9,14 +10,10 @@
     <title>Mind Space</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..600;1,100..600&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-bg-page text-text-main font-hanken-grotesk pb-20 transition-colors duration-300">
+<body class="bg-bg-page text-text-main font-sans pb-20 transition-colors duration-300">
     <div class='px-12'>
         <nav class='flex justify-between items-center py-4 border-b border-border-soft'>
             <div>
