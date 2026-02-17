@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\AuthorController;
 
 
 Route::get('/', function () {
@@ -58,3 +59,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/account/restore/{user}', [ProfileController::class, 'restore'])
     ->name('account.restore')
     ->middleware('signed'); // add a secret key (only the button in the email would work)
+
+Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
+Route::get('/authors/{author}', [AuthorController::class, 'show'])->name('authors.show');

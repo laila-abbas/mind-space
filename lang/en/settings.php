@@ -15,6 +15,9 @@ return [
     'photo_apply_notice' => 'Click "Save Changes" to apply your new photo.',
     'adjust_photo' => 'Adjust your photo',
     'author_info' => 'Author Info',
+    'update_email_failed' => 'Unable to update email address.',
+    'avatar_max_size' => 'The avatar may not be greater than 2 MB.',
+    'avatar_invalid_type' => 'The avatar must be a PNG or JPG.',
 
     // security
     'security' => 'Security',

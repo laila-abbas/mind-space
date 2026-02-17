@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}"
       dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}"
-      class="{{ app()->getLocale() === 'ar' ? 'font-arabic' : 'font-english' }}"
->
+      class="{{ app()->getLocale() === 'ar' ? 'font-arabic' : 'font-english' }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,71 +10,74 @@
     <title>Mind Space</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="bg-bg-page text-text-main font-sans pb-20 transition-colors duration-300">
-    <div class='px-12'>
-        <nav class='flex justify-between items-center py-4 border-b border-border-soft'>
+    <nav x-data="{ mobileOpen: false }" class="sticky top-0 z-50 bg-bg-page/90">
+        
+        <div class="px-6 sm-md:px-12 flex justify-between items-center py-4">
+            
             <div>
-                <a href="/">
-                    <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="" class="h-10 w-auto block">
+                <a href="/"> {{-- edit route --}}
+                    <img 
+                        src="{{ Vite::asset('resources/images/logo.svg') }}"
+                        alt="Logo"
+                        class="h-10 w-auto"
+                    >
                 </a>
             </div>
-
-            <div class='space-x-10 font-bold'>
-                <a href="#">{{ __('home.home') }}</a>
-                <a href="#">{{ __('home.books') }}</a>
-                <a href="#">{{ __('home.authors') }}</a>
-                <a href="#">{{ __('home.categories') }}</a>
-                <a href="#">{{ __('home.publishing_houses') }}</a>
+            
+            <div class="hidden sm-md:flex gap-6 font-bold items-center">
+                <x-nav-tabs />
             </div>
 
+            {{-- large screens --}}
+            <div class="hidden sm-md:flex items-center">
+                <x-nav-auth />
+            </div>
+
+            {{-- small screens --}}
+            <div class="sm-md:hidden">
+                <button type="button" @click="mobileOpen = !mobileOpen">
+                    <x-lucide-menu x-show="!mobileOpen" x-cloak class="w-6 h-6" />
+                    <x-lucide-x x-show="mobileOpen" x-cloak class="w-6 h-6" />
+                </button>
+            </div>
+        </div>
+
+        <div x-show="mobileOpen"
+             x-transition.opacity
+             x-transition.duration.300ms
+             @click.away="mobileOpen = false"
+             class="sm-md:hidden fixed inset-x-0 top-[72px] bottom-0 px-6 pb-4 flex flex-col space-y-2 bg-bg-page shadow-md overflow-y-auto z-40">
+
             @auth
-                <x-dropdowns.dropdown>
-                    <x-slot name="trigger">
-                        <x-lucide-user-round
-                            class="w-10 h-10 p-2 rounded-full
-                                bg-bg-muted text-text-muted
-                                dark:bg-bg-surface dark:text-text-main dark:hover:ring-brand-accent-2
-                                transition-all duration-300
-                                hover:scale-105 hover:ring-1 hover:ring-brand-accent-2/25"
-                        />
-                    </x-slot>
-
-                    <x-dropdowns.item href="{{ route('profile.edit') }}">
-                        <x-slot name="icon">
-                            <x-lucide-settings />
-                        </x-slot>
-                        {{ __('home.settings') }}
-                    </x-dropdowns.item>
-                    
-                    @can('submit book for publishing')
-                        <x-dropdowns.item href="/books/create">{{ __('home.add_book') }}</x-dropdowns.item>
-                    @endcan
-
-                    <form method="POST" action="/logout">
-                        @csrf
-                        <button type="submit" class="group flex items-center gap-2 w-full text-left px-4 py-2.5 text-sm font-medium text-text-muted hover:bg-red-50 hover:text-red-500 rounded-lg transition-all duration-200 cursor-pointer">
-                            <x-lucide-log-out class='w-4 h-4' />
-                            <span>{{ __('home.logout') }}</span>
-                        </button>
-                    </form>
-                    
-                </x-dropdowns.dropdown>
+                <div class="flex items-center gap-3 px-4 py-2">
+                    <img src="{{ auth()->user()->avatar_url }}" alt="{{ auth()->user()->first_name }}" class="w-15 h-15 rounded-full ring-2 ring-brand-accent/40">
+                    <span class="font-medium">{{ auth()->user()->first_name }}</span>
+                </div>
             @endauth
 
-            @guest
-                <div class='space-x-6 font-bold'>
-                    <a href={{ route('register') }}>{{ __('home.signup') }}</a>
-                    <a href={{ route('login') }}>{{ __('home.login') }}</a>
-                </div>
-            @endguest
-        </nav>
+            <div class="flex flex-col gap-1 border-b border-border-soft py-2">
+                <h3 class="text-sm font-semibold text-text-muted px-4 uppercase">{{ __('home.navigation') }}</h3>
+                <x-nav-tabs mobile />
+            </div>
 
-        <main>
-            {{ $slot }}
-        </main>
-    </div>
+            <div class="flex flex-col gap-1 py-2">
+                <h3 class="text-sm font-semibold text-text-muted px-4 uppercase">{{ __('home.account') }}</h3>
+                <x-nav-auth mobile />
+            </div>
+        </div>
+        
+        <div class="sm-md:px-10">
+            <div class="h-[1px] w-full bg-border-soft"></div>
+        </div>
+    </nav>
+
+    <main class="px-6 sm-md:px-12 mt-6">
+        {{ $slot }}
+    </main>
+
 </body>
 </html>

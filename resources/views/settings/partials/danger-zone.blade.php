@@ -4,7 +4,7 @@
     </x-section-header>
 
     <div x-data="{ confirm: false }">
-        <div class="flex justify-start pt-4 gap-3">
+        <div class="flex flex-col lg:flex-row justify-start pt-4 gap-3">
             <div>
                 <button
                     type="button"

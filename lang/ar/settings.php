@@ -15,6 +15,9 @@ return [
     'photo_apply_notice' => 'انقر على "حفظ التغييرات" لتطبيق صورتك الجديدة.',
     'adjust_photo' => 'تعديل الصورة',
     'author_info' => 'معلومات الكاتب',
+    'update_email_failed' => 'تعذّر تحديث عنوان البريد الإلكتروني.',
+    'avatar_max_size' => 'يجب ألا يتجاوز حجم الصورة الشخصية 2 ميجابايت.',
+    'avatar_invalid_type' => 'يجب أن تكون الصورة الشخصية بصيغة PNG أو JPG.',
 
     // security
     'security' => 'الأمان',

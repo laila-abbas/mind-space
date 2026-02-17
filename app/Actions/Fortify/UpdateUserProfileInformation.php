@@ -33,7 +33,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'biography' => ['nullable', 'string'],
             'website_url' => ['nullable', 'url'],
         ], [
-            'email.unique' => 'Unable to update email address.',
+            'email.unique' => __('settings.update_email_failed'),
         ])->validateWithBag('updateProfileInformation');
 
 
@@ -50,7 +50,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 
             if (!preg_match('/^data:image\/(jpg|jpeg);base64,/', $image)) {
                 throw \Illuminate\Validation\ValidationException::withMessages([
-                    'cropped_avatar' => 'The avatar must be a PNG or JPG.',
+                    'cropped_avatar' => __('settings.avatar_invalid_type'),
                 ])->errorBag('updateProfileInformation');
             }
 
@@ -62,7 +62,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $sizeInMB = strlen($decoded) / 1024 / 1024;
             if ($sizeInMB > 2) {
                 throw \Illuminate\Validation\ValidationException::withMessages([
-                    'cropped_avatar' => 'The avatar may not be greater than 2 MB.',
+                    'cropped_avatar' => __('settings.avatar_max_size'),
                 ])->errorBag('updateProfileInformation');
             }
 

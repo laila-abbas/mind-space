@@ -20,4 +20,9 @@ class Author extends Model
     public function books() {
         return $this->belongsToMany(Book::class)->withPivot('role');
     }
+
+    public function getDisplayNameAttribute() {
+        return $this->pen_name
+            ?? $this->user->first_name . ' ' . $this->user->last_name;
+    }
 }

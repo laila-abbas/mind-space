@@ -14,4 +14,7 @@ return [
     'logout' => 'Log Out',
     'signup' => 'Sign Up',
     'login' => 'Log In',
+
+    'navigation' => 'Navigation',
+    'account' => 'Account',
 ];

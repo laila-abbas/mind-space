@@ -14,8 +14,8 @@
         <input type="hidden" name="cropped_avatar" :value="croppedData">
         <input type="hidden" name="remove_avatar" :value="removeAvatar">
 
-        <div class="flex items-center gap-10 px-6 py-4 bg-brand-soft rounded-2xl border border-border-soft">
-            <div class="relative w-20 h-20 group">
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10 px-6 py-4 bg-brand-soft rounded-2xl border border-border-soft">
+            <div class="relative w-20 h-20 group mx-auto sm:mx-0">
                 <img 
                     :src="imageUrl"
                     class="w-20 h-20 rounded-full object-cover ring-1 ring-brand"
@@ -31,7 +31,7 @@
                     />
                 </span>
             </div>
-            <div>
+            <div class="flex flex-col items-center sm:items-start text-center sm:text-left space-y-2 w-full sm:w-auto">
                 <x-forms.field label="{{ __('settings.profile_photo') }}" name="cropped_avatar" :errorBag="'updateProfileInformation'">
                     <input 
                         type="file" 
