@@ -22,7 +22,7 @@
         </p>
 
         <p class="text-sm text-text-muted">
-            {{ trans_choice('author.book_count', $author->books_count, ['count' => $author->books_count]) }}
+            {{ trans_choice('author.book_count', $author->published_books_count, ['count' => $author->published_books_count]) }}
         </p>
 
     </div>

@@ -25,4 +25,10 @@ class Author extends Model
         return $this->pen_name
             ?? $this->user->first_name . ' ' . $this->user->last_name;
     }
+
+    public function publishedBooks() {
+        return $this->belongsToMany(Book::class)
+                    ->where('status', 'published')
+                    ->withPivot('role');
+    }
 }
