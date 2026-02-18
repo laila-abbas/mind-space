@@ -31,7 +31,7 @@
                     />
                 </span>
             </div>
-            <div class="flex flex-col items-center sm:items-start text-center sm:text-left space-y-2 w-full sm:w-auto">
+            <div class="flex flex-col items-center sm:items-start text-center sm:text-start space-y-2 w-full sm:w-auto">
                 <x-forms.field label="{{ __('settings.profile_photo') }}" name="cropped_avatar" :errorBag="'updateProfileInformation'">
                     <input 
                         type="file" 
@@ -44,7 +44,7 @@
                     <button
                         type="button"
                         @click="$refs.fileInput.click()"
-                        class="text-sm mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-brand-hover text-bg-surface hover:bg-brand-accent cursor-pointer transition-all"
+                        class="text-sm py-2 px-4 rounded-full border-0 text-sm font-semibold bg-brand-hover text-bg-surface hover:bg-brand-accent cursor-pointer transition-all"
                     >
                         {{ __('settings.choose_photo') }}
                     </button>

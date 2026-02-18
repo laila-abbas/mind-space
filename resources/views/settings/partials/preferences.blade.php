@@ -35,7 +35,8 @@
         
         <label class="flex items-center gap-8 py-3">
             <div class="flex items-center gap-2">
-                <x-lucide-moon class="w-5 h-5 text-text-muted" />
+                <x-lucide-sun x-show="$store.theme.mode === 'dark'" class="w-5 h-5 text-yellow-500" />
+                <x-lucide-moon x-show="$store.theme.mode !== 'dark'" class="w-5 h-5 text-text-muted" />
                 <span>{{ __('settings.dark_mode') }}</span>
             </div>
 

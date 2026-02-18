@@ -17,14 +17,9 @@
     <nav x-data="{ mobileOpen: false }" class="sticky top-0 z-50 bg-bg-page/90">
         
         <div class="px-6 sm-md:px-12 flex justify-between items-center py-4">
-            
             <div>
                 <a href="/"> {{-- edit route --}}
-                    <img 
-                        src="{{ Vite::asset('resources/images/logo.svg') }}"
-                        alt="Logo"
-                        class="h-10 w-auto"
-                    >
+                    <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="Logo" class="h-10 w-auto">
                 </a>
             </div>
             
@@ -34,7 +29,7 @@
 
             {{-- large screens --}}
             <div class="hidden sm-md:flex items-center">
-                <x-nav-auth />
+                <x-user-menu />
             </div>
 
             {{-- small screens --}}
@@ -50,24 +45,9 @@
              x-transition.opacity
              x-transition.duration.300ms
              @click.away="mobileOpen = false"
-             class="sm-md:hidden fixed inset-x-0 top-[72px] bottom-0 px-6 pb-4 flex flex-col space-y-2 bg-bg-page shadow-md overflow-y-auto z-40">
-
-            @auth
-                <div class="flex items-center gap-3 px-4 py-2">
-                    <img src="{{ auth()->user()->avatar_url }}" alt="{{ auth()->user()->first_name }}" class="w-15 h-15 rounded-full ring-2 ring-brand-accent/40">
-                    <span class="font-medium">{{ auth()->user()->first_name }}</span>
-                </div>
-            @endauth
-
-            <div class="flex flex-col gap-1 border-b border-border-soft py-2">
-                <h3 class="text-sm font-semibold text-text-muted px-4 uppercase">{{ __('home.navigation') }}</h3>
-                <x-nav-tabs mobile />
-            </div>
-
-            <div class="flex flex-col gap-1 py-2">
-                <h3 class="text-sm font-semibold text-text-muted px-4 uppercase">{{ __('home.account') }}</h3>
-                <x-nav-auth mobile />
-            </div>
+             class="sm-md:hidden fixed inset-x-0 top-[72px] bottom-0 px-6 pb-4 flex flex-col space-y-2 bg-bg-page shadow-md overflow-y-auto z-40"
+        >
+           <x-user-menu mobile />
         </div>
         
         <div class="sm-md:px-10">

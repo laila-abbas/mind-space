@@ -29,7 +29,7 @@ body { font-family: var(--font-sans); }
     --font-cairo: 'Cairo', ui-sans-serif, system-ui, sans-serif;
     --font-sans: var(--font-hanken-grotesk);
     --text-2xs: 0.625rem; 
-    --breakpoint-sm-md: 43.75rem;
+    --breakpoint-sm-md: 59.75rem;
     
     /* surfaces + layouts */
     --color-bg-page: #F5FAF6;
