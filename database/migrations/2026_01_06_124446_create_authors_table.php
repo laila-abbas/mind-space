@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('pen_name')->nullable();
             $table->text('biography')->nullable();
             $table->string('website_url')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

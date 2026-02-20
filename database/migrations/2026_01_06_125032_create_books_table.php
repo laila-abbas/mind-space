@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('ISBN')->unique()->nullable();
-            $table->string('language');
-            $table->string('cover_image_path')->nullable();
-            $table->enum('status', ['draft', 'submitted', 'rejected', 'published'])->default('draft');
+            $table->string('slug')->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

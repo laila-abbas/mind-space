@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Edition;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Book>
@@ -17,20 +18,12 @@ class BookFactory extends Factory
      */
     public function definition(): array
     {
+        $title = fake()->sentence(3);
         return [
-            'title' => fake()->sentence(3),
+            'title' => $title,
             'description' => fake()->paragraph(2),
-            'ISBN' => fake()->optional()->isbn13(),
-            'language' => fake()->randomElement(['English', 'French', 'Arabic']),
-            'cover_image_path' => null,
-            'status' => fake()->randomElement(['draft', 'submitted', 'published', 'rejected']),
+            'slug' => Str::slug($title),
         ];
-    }
-
-    public function published() {
-        return $this->state(fn () => [
-            'status' => 'published'
-        ]);
     }
 
     public function withEditions($count = 1) {

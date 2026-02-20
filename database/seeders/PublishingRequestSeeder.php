@@ -16,7 +16,7 @@ class PublishingRequestSeeder extends Seeder
      */
     public function run(): void
     {
-        $books = Book::where('status', '!=', 'draft')->get();
+        $books = Book::inRandomOrder()->take(20)->get();
         $publishingHouses = PublishingHouse::all();
 
         foreach($books as $book) {

@@ -14,7 +14,7 @@ class Book extends Model
     /** @use HasFactory<\Database\Factories\BookFactory> */
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'ISBN', 'language', 'cover_image_path', 'status'];
+    protected $fillable = ['title', 'description', 'slug'];
 
     public function authors() {
         return $this->belongsToMany(Author::class)->withPivot('role');
@@ -30,5 +30,9 @@ class Book extends Model
 
     public function publishingRequest() {
         return $this->hasMany(PublishingRequest::class);
+    }
+
+    public function scopeHasPublishedEdition($query) {
+        return $query->whereHas('editions', fn($q) => $q->published());
     }
 }

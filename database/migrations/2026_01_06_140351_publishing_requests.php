@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('review_notes')->nullable();
             $table->timestamp('submitted_at')->nullable();
             $table->timestamp('reviewed_at')->nullable();
+            $table->softDeletes();
         });
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(PublishingHouse::class)->constrained()->cascadeOnDelete();
             $table->enum('position', ['editor', 'reviewer', 'manager']);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

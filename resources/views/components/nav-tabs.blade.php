@@ -3,7 +3,7 @@
 @php
     $tabs = [
         ['label' => __('home.home'), 'url' => '/'], // edit route
-        ['label' => __('home.books'), 'url' => '/books'], // edit route
+        ['label' => __('home.books'), 'url' => route('books.index')], // edit route
         ['label' => __('home.authors'), 'url' => route('authors.index')],
         ['label' => __('home.categories'), 'url' => '/categories'], // edit route
         ['label' => __('home.publishing_houses'), 'url' => '/publishing-houses'], // edit route

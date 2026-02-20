@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
 
 
 Route::get('/', function () {
@@ -62,3 +63,6 @@ Route::get('/account/restore/{user}', [ProfileController::class, 'restore'])
 
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
 Route::get('/authors/{author}', [AuthorController::class, 'show'])->name('authors.show');
+
+Route::get('/books', [BookController::class, 'index'])->name('books.index');
+Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');

@@ -14,21 +14,22 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        // non-published books (no editions)
         Book::factory()
             ->count(20)
             ->create();
 
-        // published books (with editions)
-        $publishedBooks = Book::factory()
-            ->published()
-            ->count(30)
+        $booksWithEditions = Book::factory()
+            ->count(50)
             ->withEditions(fake()->numberBetween(2, 4))
             ->create();
 
+        $booksWithPublishedEditions = $booksWithEditions->filter(function ($book) {
+            return $book->editions->whereNotNull('published_at')->isNotEmpty();
+        });
+
         $categories = Category::whereNotNull('parent_id')->get();
 
-        foreach($publishedBooks as $book) {
+        foreach ($booksWithPublishedEditions as $book) {
             $book->categories()->attach(
                 $categories->random(fake()->numberBetween(1, 3))->pluck('id')->toArray()
             );

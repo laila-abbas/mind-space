@@ -29,7 +29,7 @@
                     <p class="mt-6 text-text-muted leading-relaxed">{{ $author->biography }}</p>
                 @endif
 
-                <p class="mt-4 text-sm text-text-muted">{{ trans_choice('author.book_count', $author->publishedBooks->count(), ['count' => $author->publishedBooks->count()]) }} {{ trans_choice('author.published', $author->publishedBooks->count()) }}</p>
+                <p class="mt-4 text-sm text-text-muted">{{ trans_choice('author.book_count', $author->books->count(), ['count' => $author->books->count()]) }} {{ trans_choice('author.published', $author->books->count()) }}</p>
 
             </div>
         </div>
@@ -37,23 +37,13 @@
         <div>
             <h2 class="text-2xl font-semibold mb-6 text-center md:text-start">{{ __('author.books') }}</h2>
 
-            @if($author->publishedBooks->isEmpty())
+            @if($author->books->isEmpty())
                 <p class="text-text-muted">{{ __('author.no_books_yet') }}</p>
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-                    @foreach($author->publishedBooks as $book)
-                        <div class="bg-bg-surface p-6 rounded-xl border border-border-soft shadow-sm">
-
-                            <h3 class="font-semibold mb-2">{{ $book->title }}</h3>
-
-                            @if($book->pivot->role)
-                                <span class="text-xs bg-bg-muted px-2 py-1 rounded-full text-text-muted">
-                                    {{ ucfirst($book->pivot->role) }}
-                                </span>
-                            @endif
-
-                        </div>
+                    @foreach($author->books as $book)
+                        <x-book-card :book="$book" :show-role="true" />
                     @endforeach
 
                 </div>
