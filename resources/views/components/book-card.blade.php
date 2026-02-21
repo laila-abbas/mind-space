@@ -1,40 +1,3 @@
-{{-- @php
-    $lowestPrice = $book->editions->min('price');
-@endphp
-
-<a 
-    href="{{ route('books.show', $book) }}"
-    class="group block bg-bg-surface border border-border-soft rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300">
-   
-    <div class="aspect-[3/4] bg-bg-muted overflow-hidden">
-        <img 
-            src="{{ $book->cover_image_path 
-                ? asset('storage/' . $book->cover_image_path) 
-                : asset('images/placeholder-book.png') }}"
-            alt="{{ $book->title }}"
-            class="w-5 h-5 object-cover group-hover:scale-105 transition duration-300"
-        />
-    </div>
-
-    <div class="p-4 space-y-2">
-
-        <h3 class="font-semibold text-lg leading-tight line-clamp-2">
-            {{ $book->title }}
-        </h3>
-
-        <p class="text-sm text-text-muted">
-            {{ $book->authors->pluck('display_name')->join(', ') }}
-        </p>
-
-        @if($lowestPrice)
-            <p class="text-brand-accent font-semibold mt-2">
-                {{ __('book.from') }} {{ number_format($lowestPrice, 2) }}
-            </p>
-        @endif
-
-    </div>
-</a> --}}
-
 @props(['book'])
 
 @php
@@ -43,6 +6,8 @@
     $coverImage = $firstEdition?->cover_image_path
         ? asset('storage/' . $firstEdition->cover_image_path)
         : asset('images/default_cover.jpg');
+    
+    $formats = $book->editions()->published()->pluck('format')->unique();
 @endphp
 
 <a href="{{ route('books.show', $book) }}"
@@ -82,6 +47,21 @@
         <p class="text-sm text-text-muted">
             {{ Str::limit($book->description, 50) }}
         </p>
+
+        <div class="flex gap-2 mt-2">
+            @if($formats->contains('hardcover'))
+                <x-lucide-book class="w-4 h-4 text-text-muted" title="Hardcover" />
+            @endif
+            @if($formats->contains('paperback'))
+                <x-lucide-book-open class="w-4 h-4 text-text-muted" title="Paperback" />
+            @endif
+            @if($formats->contains('e-book'))
+                <x-lucide-tablet class="w-4 h-4 text-text-muted" title="E-Book" />
+            @endif
+            @if($formats->contains('audiobook'))
+                <x-lucide-headphones class="w-4 h-4 text-text-muted" title="Audiobook" />
+            @endif
+        </div>
 
     </div>
 </a>

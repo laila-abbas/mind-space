@@ -10,6 +10,15 @@
     <title>Mind Space</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    {{-- to prevent themes' flashing --}}
+    <script>
+        (function () {
+            const mode = localStorage.getItem('mode') || 'default';
+            document.documentElement.classList.add(mode);
+        })();
+    </script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
