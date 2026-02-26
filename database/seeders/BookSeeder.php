@@ -14,13 +14,14 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
+        // books without editions (for authors)
         Book::factory()
             ->count(20)
             ->create();
 
         $booksWithEditions = Book::factory()
             ->count(50)
-            ->withEditions(fake()->numberBetween(2, 4))
+            ->withEditions()
             ->create();
 
         $booksWithPublishedEditions = $booksWithEditions->filter(function ($book) {

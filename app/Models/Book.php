@@ -35,4 +35,22 @@ class Book extends Model
     public function scopeHasPublishedEdition($query) {
         return $query->whereHas('editions', fn($q) => $q->published());
     }
+
+    public function getPublishedEditionsAttribute() {
+        return $this->editions
+                    ->whereNotNull('published_at')
+                    ->sortBy('published_at')
+                    ->values();
+    }
+
+    public function getCoverImageAttribute() {
+        $firstFormat = $this->published_editions->flatMap->formats->first();
+        return $firstFormat?->cover_image_path
+            ? asset('storage/' . $firstFormat->cover_image_path)
+            : asset('images/default_cover.jpg');
+    }
+
+    public function getFormatsAttribute() {
+        return $this->published_editions->flatMap->formats->pluck('format')->unique();
+    }
 }

@@ -22,7 +22,7 @@ class CategoryFactory extends Factory
 
         return [
             'name' => ucfirst($name),
-            'slug' => Str::slug($name),
+            'slug' => Str::slug($name) . '-' . fake()->unique()->numberBetween(1, 9999),
             'parent_id' => null,
         ];
     }

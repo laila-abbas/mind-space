@@ -17,17 +17,17 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Book::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(PublishingHouse::class)->constrained()->cascadeOnDelete();
-            $table->enum('format', ['hardcover', 'paperback', 'e-book', 'audiobook']);
-            $table->string('ISBN')->unique()->nullable();
+
+            $table->string('edition_title')->nullable(); 
+            $table->unsignedInteger('edition_number')->default(1);
+            $table->text('edition_description')->nullable();
             $table->string('language');
-            $table->string('cover_image_path')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->integer('pages')->nullable();
+
             $table->timestamp('published_at')->nullable(); // nullable for staging/scheduling...
-            $table->integer('stock')->default(0);
+            
             $table->softDeletes();
             $table->timestamps();
-            $table->unique(['book_id', 'publishing_house_id', 'format']);
+            $table->unique(['book_id', 'edition_number']);
         });
     }
 
