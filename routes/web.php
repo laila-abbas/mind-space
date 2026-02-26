@@ -65,4 +65,4 @@ Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index'
 Route::get('/authors/{author}', [AuthorController::class, 'show'])->name('authors.show');
 
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
-Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
+Route::get('/books/{book:slug}', [BookController::class, 'show'])->name('books.show');

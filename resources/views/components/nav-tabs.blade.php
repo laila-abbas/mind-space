@@ -11,20 +11,28 @@
 @endphp
 
 @foreach($tabs as $tab)
+    @php 
+        $isActive = request()->fullUrlIs($tab['url']);
+    @endphp
+
     @if($mobile)
         <a 
             href="{{ $tab['url'] }}"
-            class="px-4 py-2 rounded-lg text-text-main hover:bg-brand-hover hover:text-bg-surface transition"
+            class="px-4 py-2 rounded-lg transition 
+                    {{ $isActive 
+                        ? 'bg-brand-hover/10 text-brand-accent font-bold' 
+                        : 'text-text-main hover:bg-brand-hover hover:text-bg-surface' 
+                    }}"
         >
             {{ $tab['label'] }}
         </a>
     @else
         <a 
             href="{{ $tab['url'] }}"
-            class="relative px-1 text-text-main hover:text-brand-accent transition duration-300 group font-bold"
+            class="relative px-1 transition duration-300 group font-bold {{ $isActive ? 'text-brand-accent' : 'text-text-main hover:text-brand-accent' }}"
         >
             {{ $tab['label'] }}
-            <span class="absolute start-0 -bottom-1 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full"></span>
+            <span class="absolute start-0 -bottom-1 h-0.5 bg-brand-accent transition-all duration-300 {{ $isActive ? 'w-full' : 'w-0 group-hover:w-full' }}"></span>
         </a>
     @endif
 @endforeach

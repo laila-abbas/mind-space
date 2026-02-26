@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EditionFormat extends Model
 {
-     use HasFactory;
+     use HasFactory, SoftDeletes;
      
     protected $fillable = ['edition_id', 'format', 'ISBN', 'cover_image_path', 'price', 'stock', 'pages'];
 

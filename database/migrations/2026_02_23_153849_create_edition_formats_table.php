@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2)->default(0);
             $table->integer('stock')->default(0);
             $table->integer('pages')->nullable();
+            $table->softDeletes();
             $table->timestamps();
             $table->unique(['edition_id', 'format']);
         });
