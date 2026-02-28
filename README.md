@@ -1,3 +1,60 @@
+Publishing House Management Platform
+
+**Tech Stack**
+- Laravel
+- Laravel Fortify
+- Spatie Permissions
+- MariaDB
+- Blade + Alpine.js
+- Tailwind CSS
+
+**Core Features**
+
+**Authentication & Security**
+- Custom Laravel Fortify integration
+- Email verification & password reset
+- Registration & password reset throttling
+- Protection against user enumeration
+- Client + server-side validation
+- Role-based redirection
+- Signed account restore links (14-day grace period)
+- Scheduled hard deletion of soft-deleted users
+
+**Role-Based Access Control**
+- Roles & permissions via Spatie
+- Admin, Publisher, Author, Reader roles
+- Role-protected dashboards
+- Database seeders for roles and initial admin
+
+**Account Lifecycle Design**
+- Soft deletes with cascading behavior via model observers
+- Restore flow via signed email link
+- Scheduled purge command for permanent deletion
+
+**Multilingual Support (English / Arabic)**
+- Locale stored in database
+- Middleware-based locale resolution (user -> cookie -> browser preference -> fallback)
+- Full UI + emails translations
+- RTL / LTR handling
+- Pluralization support
+
+**Domain Modeling & Data Integrity**
+- Refactored Book -> Edition -> EditionFormat structure
+- Database-level unique constraints
+- Cascading soft deletes
+- Slug-based routing for SEO-friendly URLs
+- Computed model accessors
+- Clean factory & seeder design respecting constraints
+
+**UI / UX Enhancements**
+- Dark mode & theme switching
+- Avatar upload & cropping
+- Custom Blade components
+- Responsive layout
+
+
+**Screenshots**
+
 ![singup](https://github.com/user-attachments/assets/4090ad70-72e5-4016-a488-c3efeb1989c9)
 
 ![verification](https://github.com/user-attachments/assets/d9fee5fc-3611-49f7-bec9-85ad2daff092)
