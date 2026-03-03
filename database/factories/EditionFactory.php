@@ -4,7 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\PublishingHouse;
-use App\Models\EditionFormat;
+use App\Models\EditionReview;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Edition>
@@ -26,5 +27,23 @@ class EditionFactory extends Factory
             'language' => fake()->randomElement(['English', 'French', 'Arabic']),
             'published_at' => fake()->optional(0.7)->dateTime(), 
         ];
+    }
+
+    public function withReviews() {
+        return $this->afterCreating(function ($edition) {
+
+            $reviewCount = fake()->numberBetween(0, 20);
+
+            if ($reviewCount === 0) return;
+
+            $users = User::inRandomOrder()->take($reviewCount)->get();
+
+            foreach ($users as $user) {
+                EditionReview::factory()->create([
+                    'edition_id' => $edition->id,
+                    'user_id' => $user->id,
+                ]);
+            }
+        });
     }
 }

@@ -27,4 +27,8 @@ class PublishingHouse extends Model
     public function publishingRequests() {
         return $this->hasMany(PublishingRequest::class);
     }
+
+    public function editions() {
+        return $this->hasMany(Edition::class);
+    }
 }

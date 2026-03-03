@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\EditionReviewController;
 
 
 Route::get('/', function () {
@@ -66,3 +67,11 @@ Route::get('/authors/{author}', [AuthorController::class, 'show'])->name('author
 
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/books/{book:slug}', [BookController::class, 'show'])->name('books.show');
+
+Route::middleware('auth')->group(function() {
+    Route::post('/editions/{edition}/reviews', [EditionReviewController::class, 'store'])
+        ->name('edition-reviews.store');
+});
+
+Route::get('/editions/{edition}/reviews', [EditionReviewController::class, 'index'])
+    ->name('edition-reviews.index');

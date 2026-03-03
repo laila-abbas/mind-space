@@ -18,7 +18,7 @@
             document.documentElement.classList.add(mode);
         })();
     </script>
-
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -67,6 +67,5 @@
     <main class="px-6 sm-md:px-12 mt-6">
         {{ $slot }}
     </main>
-
 </body>
 </html>

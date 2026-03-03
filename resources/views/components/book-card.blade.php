@@ -19,7 +19,7 @@
             {{ $book->title }}
         </h3>
 
-        <x-book-rating :rating="$book->rating" :rating-count="$book->ratingCount" />
+        <x-book-rating :rating="$book->rating" :rating-count="$book->ratingCount" class='flex-col' />
 
         @if($showRole && $book->pivot->role)
             <span class="text-xs bg-bg-muted px-2 py-1 rounded-full text-text-muted">

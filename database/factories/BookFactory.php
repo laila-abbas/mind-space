@@ -33,7 +33,7 @@ class BookFactory extends Factory
             $editionCount = fake()->numberBetween(1, 5);
 
             for ($i = 1; $i <= $editionCount; $i++) { 
-                $edition = Edition::factory()->create(['book_id' => $book->id, 'edition_number' => $i]);
+                $edition = Edition::factory()->withReviews()->create(['book_id' => $book->id, 'edition_number' => $i]);
 
                 $formats = collect(['hardcover', 'paperback', 'e-book', 'audiobook'])
                             ->shuffle()
@@ -42,7 +42,6 @@ class BookFactory extends Factory
                 $edition->formats()->saveMany(
                     $formats->map(fn ($format) => EditionFormat::factory()->make(['format' => $format]))
                 );
-
             }
         });
     }

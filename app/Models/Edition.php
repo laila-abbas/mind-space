@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Observers\EditionObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
-// #[ObservedBy([EditionObserver::class])]
+#[ObservedBy([EditionObserver::class])]
 class Edition extends Model
 {
     /** @use HasFactory<\Database\Factories\EditionFactory> */
@@ -60,6 +60,10 @@ class Edition extends Model
         return $this->edition_title
             ? "{$base} – {$this->edition_title}"
             : $base;
+    }
+
+    public function reviews() {
+        return $this->hasMany(EditionReview::class);
     }
 }
 

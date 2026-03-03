@@ -9,19 +9,25 @@ class BookController extends Controller
 {
     public function index() {
         $books = Book::hasPublishedEdition()
-                ->with([
-                    'authors',
-                    'categories',
-                    'editions' => fn($q) => $q->published()->with(['formats', 'publishingHouse'])
-                ])->paginate(12);
-        
-        // default for now
+            ->with([
+                'authors',
+                'categories',
+                'editions' => function($q) {
+                    $q->published()
+                    ->withCount('reviews')
+                    ->withAvg('reviews', 'rating')
+                    ->with(['formats', 'publishingHouse']);
+                },
+            ])
+            ->paginate(12);
+
         $books->getCollection()->transform(function ($book) {
-            $book->rating = 3.5;         
-            $book->ratingCount = 12;     
+            $book->ratingCount = $book->editions->sum('reviews_count');
+            $avgRating = $book->editions->avg('reviews_avg_rating') ?? 0;
+            $book->rating = number_format($avgRating, 1);
+
             return $book;
         });
-
 
         return view('books.index', compact('books'));
     }
@@ -30,12 +36,14 @@ class BookController extends Controller
         $book->load([
             'authors',
             'categories',
-            'editions' => fn($q) => $q->published()->with(['formats', 'publishingHouse'])->orderBy('published_at'),
+            'editions' => function($q) {
+                $q->published()
+                ->with(['formats', 'publishingHouse'])
+                ->withCount('reviews')         
+                ->withAvg('reviews', 'rating')
+                ->orderBy('published_at');
+            },
         ]);
-
-        // default for now
-        $book->rating = 4.5;
-        $book->ratingCount = 8;
 
         return view('books.show', compact('book'));
     }
