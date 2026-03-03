@@ -70,3 +70,5 @@ Publishing House Management Platform
 ![settings](https://github.com/user-attachments/assets/50878cb1-9312-4c43-a8a8-3f7790a022be)
 
 ![delete-account](https://github.com/user-attachments/assets/73f4ec55-3d29-47eb-9767-0dafc6aa3060)
+
+![reviews](https://github.com/user-attachments/assets/37a18147-472a-4479-8da2-25bf3061ed13)
