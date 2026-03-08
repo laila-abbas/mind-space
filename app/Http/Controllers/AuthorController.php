@@ -17,11 +17,9 @@ class AuthorController extends Controller
     }
 
     public function show(Author $author) {
-        $author->load([
-            'user',
-            'books' => fn($q) => $q->hasPublishedEdition()->with(['editions' => fn($e) => $e->published()])
-        ]);
-
-        return view('authors.show', compact('author'));
+        $author->load('user');
+        $books = $author->books()->withCatalogData()->paginate(12);
+        
+        return view('authors.show', compact('author', 'books'));
     }
 }

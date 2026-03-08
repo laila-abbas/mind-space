@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Author>
@@ -17,10 +18,12 @@ class AuthorFactory extends Factory
      */
     public function definition(): array
     {
-        return [// user_id
-            'pen_name' => fake()->name(),
+        $name = fake()->unique()->name(); 
+        return [
+            'pen_name' => $name,
             'biography' => fake()->paragraph(2),
             'website_url' => fake()->optional()->url(),
+            'slug' => Str::slug($name) . '-' . fake()->unique()->numberBetween(1, 9999),
         ];
     }
 }

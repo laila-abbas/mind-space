@@ -38,7 +38,7 @@ class ProfileController extends Controller
             abort(403);
         }
         // send deletion email before logout
-        $user->notify(new AccountDeleted());
+        $user->notify((new AccountDeleted())->locale(app()->getLocale()));
 
         Auth::logout();
 

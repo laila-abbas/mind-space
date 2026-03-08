@@ -17,8 +17,8 @@
                     <x-author-card :author="$author" />
                 @endforeach
             </div>
-            <div class="mt-10 flex justify-center">
-                {{ $authors->links('vendor.pagination.tailwind') }}
+            <div class="mt-10">
+                {{ $authors->links() }}
             </div>
         @endif
     </div>

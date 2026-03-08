@@ -5,14 +5,20 @@
         ['label' => __('home.home'), 'url' => '/'], // edit route
         ['label' => __('home.books'), 'url' => route('books.index')], // edit route
         ['label' => __('home.authors'), 'url' => route('authors.index')],
-        ['label' => __('home.categories'), 'url' => '/categories'], // edit route
+        ['label' => __('home.categories'), 'url' => route('categories.index')], // edit route
         ['label' => __('home.publishing_houses'), 'url' => '/publishing-houses'], // edit route
     ];
 @endphp
 
 @foreach($tabs as $tab)
-    @php 
-        $isActive = request()->fullUrlIs($tab['url']);
+    @php
+        $path = ltrim(parse_url($tab['url'], PHP_URL_PATH), '/');
+
+        if ($path === '') { 
+            $isActive = request()->is('/'); // home so it won't be activated all the time
+        } else {
+            $isActive = request()->is($path.'*'); // match all sub paths
+        }
     @endphp
 
     @if($mobile)

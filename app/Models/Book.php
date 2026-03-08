@@ -53,4 +53,29 @@ class Book extends Model
     public function getFormatsAttribute() {
         return $this->published_editions->flatMap->formats->pluck('format')->unique();
     }
+
+    public function getRatingAttribute() {
+        $avg = $this->editions->avg('reviews_avg_rating') ?? 0;
+
+        return number_format($avg, 1);
+    }
+
+    public function getRatingCountAttribute() {
+        return $this->editions->sum('reviews_count');
+    }
+
+    public function scopeWithCatalogData($query) {
+        return $query->hasPublishedEdition()
+            ->with([
+                'authors',
+                'categories',
+                'editions' => function ($q) {
+                    $q->published()
+                        ->withCount('reviews')
+                        ->withAvg('reviews', 'rating')
+                        ->with(['formats', 'publishingHouse'])
+                        ->orderBy('published_at');
+                },
+            ]);
+    }
 }

@@ -11,12 +11,19 @@
             <div class="flex-1">
                 <h1 class="text-3xl font-bold">{{ $book->title }}</h1>
                 <p class="text-sm text-text-muted mt-1">
-                    {{ __('book.by') }} {{ $book->authors->pluck('display_name')->join(', ') }}
+                    {{ __('book.by') }}
+                    @foreach($book->authors as $author)
+                        <a href="{{ route('authors.show', $author) }}" class="text-sm text-text-muted mt-1 hover:underline">
+                            {{ $author->display_name }}
+                        </a>{{ !$loop->last ? ',' : '' }}
+                    @endforeach
                 </p>
                 <p class="mt-4">{{ $book->description }}</p>
                 <div class="flex flex-wrap gap-2 mt-2">
                     @foreach($book->categories as $category)
-                        <x-chip>{{ $category->name }}</x-chip>
+                        <a href="{{ route('categories.show', $category) }}">
+                            <x-chip>{{ $category->name }}</x-chip>
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -70,7 +77,7 @@
                             @foreach($edition->formats as $format)
                                 <div class="border border-brand shadow-sm dark:shadow-black/20 rounded-xl p-4 flex flex-col items-center text-center bg-bg-surface">
                                     <div class="w-32 h-48 rounded-xl shadow mb-2">
-                                        <img src="{{ $format->cover_image }}" class="w-full h-full object-cover">
+                                        <img src="{{ $format->cover_image }}" class="w-full h-full object-cover rounded-xl">
                                     </div>
                                     <h4 class="font-semibold">{{ ucfirst($format->format) }}</h4>
                                     @if($format->pages)

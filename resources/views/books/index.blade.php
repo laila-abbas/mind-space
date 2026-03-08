@@ -15,8 +15,8 @@
                     <x-book-card :book="$book" :show-role="false" />
                 @endforeach
             </div>
-            <div class="mt-10 flex justify-center">
-                {{ $books->links('vendor.pagination.tailwind') }}
+            <div class="mt-10">
+                {{ $books->links() }}
             </div>
         @endif
     </div>

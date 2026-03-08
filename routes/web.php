@@ -8,6 +8,7 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\EditionReviewController;
+use App\Http\Controllers\CategoryController;
 
 
 Route::get('/', function () {
@@ -63,7 +64,7 @@ Route::get('/account/restore/{user}', [ProfileController::class, 'restore'])
     ->middleware('signed'); // add a secret key (only the button in the email would work)
 
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
-Route::get('/authors/{author}', [AuthorController::class, 'show'])->name('authors.show');
+Route::get('/authors/{author:slug}', [AuthorController::class, 'show'])->name('authors.show');
 
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/books/{book:slug}', [BookController::class, 'show'])->name('books.show');
@@ -75,3 +76,7 @@ Route::middleware('auth')->group(function() {
 
 Route::get('/editions/{edition}/reviews', [EditionReviewController::class, 'index'])
     ->name('edition-reviews.index');
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
+Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');

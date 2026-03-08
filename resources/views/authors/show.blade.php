@@ -29,7 +29,7 @@
                     <p class="mt-6 text-text-muted leading-relaxed">{{ $author->biography }}</p>
                 @endif
 
-                <p class="mt-4 text-sm text-text-muted">{{ trans_choice('author.book_count', $author->books->count(), ['count' => $author->books->count()]) }} {{ trans_choice('author.published', $author->books->count()) }}</p>
+                <p class="mt-4 text-sm text-text-muted">{{ trans_choice('author.book_count', $books->count(), ['count' => $books->count()]) }} {{ trans_choice('author.published', $author->books->count()) }}</p>
 
             </div>
         </div>
@@ -37,15 +37,16 @@
         <div>
             <h2 class="text-2xl font-semibold mb-6 text-center md:text-start">{{ __('author.books') }}</h2>
 
-            @if($author->books->isEmpty())
+            @if($books->isEmpty())
                 <p class="text-text-muted">{{ __('author.no_books_yet') }}</p>
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-
-                    @foreach($author->books as $book)
+                    @foreach($books as $book)
                         <x-book-card :book="$book" :show-role="true" />
                     @endforeach
-
+                </div>
+                <div class="mt-10">
+                    {{ $books->links() }}
                 </div>
             @endif
         </div>

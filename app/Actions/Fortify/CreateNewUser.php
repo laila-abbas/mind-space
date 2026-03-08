@@ -46,10 +46,10 @@ class CreateNewUser implements CreatesNewUsers
         if ($existingUser) {
             if ($existingUser->trashed()) {
                 // account was deleted intentionally
-                $existingUser->notify(new RestoreAccountNotification());
+                $existingUser->notify((new RestoreAccountNotification())->locale(app()->getLocale()));
                 return null;
             }
-            $existingUser->notify(new AlreadyHaveAccount());
+            $existingUser->notify((new AlreadyHaveAccount())->locale(app()->getLocale()));
             return null;
         }
 
