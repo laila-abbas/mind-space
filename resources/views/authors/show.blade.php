@@ -35,10 +35,15 @@
         </div>
 
         <div>
-            <h2 class="text-2xl font-semibold mb-6 text-center md:text-start">{{ __('author.books') }}</h2>
+            <x-paginated-header :title="__('author.books')" :collection="$books" />
 
             @if($books->isEmpty())
-                <p class="text-text-muted">{{ __('author.no_books_yet') }}</p>
+                <div class="flex flex-col items-center justify-center py-20 bg-brand-soft/10 rounded-2xl border-2 border-dashed border-border-brand-soft">
+                    <div class="p-4 rounded-full bg-bg-surface mb-4 shadow-sm">
+                        <x-lucide-book-x class="w-10 h-10 text-brand-accent/30" />
+                    </div>
+                    <p class="text-text-muted font-medium text-lg">{{ __('author.no_books_yet') }}</p>
+                </div>
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach($books as $book)

@@ -14,7 +14,7 @@ class Book extends Model
     /** @use HasFactory<\Database\Factories\BookFactory> */
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'slug'];
+    protected $fillable = ['title', 'description'];
 
     public function authors() {
         return $this->belongsToMany(Author::class)->withPivot('role');
@@ -77,5 +77,11 @@ class Book extends Model
                         ->orderBy('published_at');
                 },
             ]);
+    }
+
+    public function scopePublishedByHouse($query, $houseId) {
+        return $query->whereHas('editions', function ($q) use ($houseId) {
+            $q->published()->where('publishing_house_id', $houseId);
+        });
     }
 }

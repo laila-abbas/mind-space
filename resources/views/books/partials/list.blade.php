@@ -2,7 +2,7 @@
     @forelse($reviews as $review)
         <div class="flex gap-4 p-4 rounded-xl bg-bg-surface border border-brand/50 shadow-md">
             <div class="w-12 h-12 rounded-full bg-brand/20">
-                <img src="{{ $review->user->avatar_url }}" class="w-full h-full object-cover">
+                <img src="{{ $review->user->avatar_url }}" class="w-full h-full object-cover rounded-full">
             </div>
             <div class="flex-1">
                 <div class="flex justify-between items-start">

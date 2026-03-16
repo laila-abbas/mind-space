@@ -17,6 +17,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('website_url')->nullable();
             $table->string('email')->unique();
+            $table->string('logo')->nullable();
+            $table->string('slug')->unique();
             $table->softDeletes();
             $table->timestamps();
         });

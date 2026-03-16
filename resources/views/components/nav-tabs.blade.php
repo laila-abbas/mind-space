@@ -2,11 +2,11 @@
 
 @php
     $tabs = [
-        ['label' => __('home.home'), 'url' => '/'], // edit route
-        ['label' => __('home.books'), 'url' => route('books.index')], // edit route
+        ['label' => __('home.home'), 'url' => '/'], 
+        ['label' => __('home.books'), 'url' => route('books.index')], 
         ['label' => __('home.authors'), 'url' => route('authors.index')],
-        ['label' => __('home.categories'), 'url' => route('categories.index')], // edit route
-        ['label' => __('home.publishing_houses'), 'url' => '/publishing-houses'], // edit route
+        ['label' => __('home.categories'), 'url' => route('categories.index')], 
+        ['label' => __('home.publishing_houses'), 'url' => route('publishing-houses.index')],
     ];
 @endphp
 

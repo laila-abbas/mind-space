@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\EditionReviewController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PublishingHouseController;
 
 
 Route::get('/', function () {
@@ -80,3 +81,9 @@ Route::get('/editions/{edition}/reviews', [EditionReviewController::class, 'inde
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
+
+Route::get('/publishing-houses', [PublishingHouseController::class, 'index'])
+    ->name('publishing-houses.index');
+
+Route::get('/publishing-houses/{publishingHouse:slug}', [PublishingHouseController::class, 'show'])
+    ->name('publishing-houses.show');

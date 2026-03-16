@@ -14,7 +14,8 @@
     @else
 
         {{-- books --}}
-        <x-page-heading>{{ $category->name }}</x-page-heading>
+        <x-paginated-header :title="$category->name" size="sm" :collection="$books" />
+
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             @foreach($books as $book)
                 <x-book-card :book="$book" :show-role="false" />

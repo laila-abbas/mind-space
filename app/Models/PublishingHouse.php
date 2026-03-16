@@ -11,7 +11,7 @@ class PublishingHouse extends Model
     /** @use HasFactory<\Database\Factories\PublishingHouseFactory> */
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'description', 'website_url', 'email'];
+    protected $fillable = ['name', 'description', 'website_url', 'email', 'logo'];
 
     public function users() {
         return $this->belongsToMany(User::class)
@@ -30,5 +30,18 @@ class PublishingHouse extends Model
 
     public function editions() {
         return $this->hasMany(Edition::class);
+    }
+
+    // subquery to add a count column w/o loading all book into memory
+    public function scopeWithPublishedBooksCount($query) {
+        return $query->addSelect([ 
+            'published_books_count' => Edition::selectRaw('COUNT(DISTINCT book_id)') 
+                ->whereColumn('publishing_house_id', 'publishing_houses.id')
+                ->whereNotNull('published_at')
+        ]);
+    }
+
+    public function getLogoUrlAttribute() {
+        return asset('storage/' . $this->logo);
     }
 }

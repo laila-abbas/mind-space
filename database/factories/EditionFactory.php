@@ -20,7 +20,7 @@ class EditionFactory extends Factory
     public function definition(): array
     {
         return [ 
-            'publishing_house_id' => PublishingHouse::factory(),
+            'publishing_house_id' => PublishingHouse::inRandomOrder()->first()->id,
             'edition_title' => fake()->optional()->words(2, true),
             // 'edition_number' => fake()->numberBetween(1, 5),
             'edition_description' => fake()->optional()->paragraph(), 
