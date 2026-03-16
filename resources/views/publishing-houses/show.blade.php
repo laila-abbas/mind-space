@@ -54,7 +54,7 @@
         @if($books->isNotEmpty())
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 @foreach($books as $book)
-                    <x-book-card :book="$book" :show-role="false" />
+                    <x-book-card :book="$book" :show-role="false" :publishingHouse="$publishingHouse" />
                 @endforeach
             </div>
 

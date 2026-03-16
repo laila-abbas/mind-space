@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use App\Notifications\AlreadyHaveAccount;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Str;
 
 
 class CreateNewUser implements CreatesNewUsers
@@ -65,11 +66,15 @@ class CreateNewUser implements CreatesNewUsers
         if (!empty($input['is_author'])) {
             $user->assignRole('Author');
 
+            $nameForSlug = $input['pen_name'] ?? trim($input['first_name'] . ' ' . $input['last_name']);
+            $cnt = 1;
+
             Author::create([
                 'user_id' => $user->id,
                 'pen_name' => $input['pen_name'],
                 'biography' => $input['biography'],
                 'website_url' => $input['website_url'],
+                'slug' => Str::slug($nameForSlug) . '-' . $cnt
             ]);
         }
 

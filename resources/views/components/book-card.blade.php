@@ -1,6 +1,6 @@
-@props(['book'])
+@props(['book', 'publishingHouse' => null])
 
-<a href="{{ route('books.show', $book) }}"
+<a href="{{ route('books.show', ['book' => $book, 'publisher' => $publishingHouse?->slug]) }}"
    class="group bg-bg-surface rounded-2xl p-6 border border-brand shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-brand-hover transition-all duration-300">
 
     <div class="flex flex-col items-center text-center space-y-4">

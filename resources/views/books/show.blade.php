@@ -1,4 +1,4 @@
-@props(['book'])
+@props(['book', 'publisherSlug' => null])
 
 <x-layout>
     <div class="max-w-6xl mx-auto p-6">
@@ -30,15 +30,36 @@
         </div>
 
         {{-- editions accordion --}}
-        <div x-data="{ openEdition: {{ session('last_edition') ?? 'null' }} }" class="space-y-2">
+        <div x-data="{ openEdition: {{ session('last_edition') ?? 'null' }}, 
+                       publisherSlug: '{{ $publisherSlug ?? '' }}', 
+                       onlyPublisher: true }" 
+             class="space-y-2"
+        >
 
+            @if($publisherSlug)
+                @php
+                    $publisherBase = preg_replace('/-\d+$/', '', $publisherSlug ?? '');
+                    $publisherName = ucwords(str_replace('-', ' ', $publisherBase));
+                @endphp
+                <div class="mb-4 flex items-center gap-2">
+                    <input type="checkbox" x-model="onlyPublisher" class="h-4 w-4 accent-brand cursor-pointer">
+                    <label for="onlyPublisher" class="text-sm font-semibold">
+                        Only show editions by {{ $publisherName }}
+                    </label>
+                </div>
+            @endif
             @foreach($book->publishedEditions as $edition)
                 @php
                     $userReview = auth()->check()
                         ? $edition->reviews->firstWhere('user_id', auth()->id())
                         : null;
                 @endphp
-                <div class="border-b border-brand">
+                <div
+                    @if($publisherSlug)
+                        x-show="!onlyPublisher || '{{ $edition->publishingHouse->slug }}' === publisherSlug"
+                    @endif
+                    class="border-b border-brand"
+                >
                     {{-- tab header --}}
                     <button 
                         @click="openEdition === {{ $edition->id }} ? openEdition = null : openEdition = {{ $edition->id }}"

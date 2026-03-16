@@ -11,7 +11,7 @@ class Author extends Model
     /** @use HasFactory<\Database\Factories\AuthorFactory> */
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id', 'pen_name', 'biography', 'website_url'];
+    protected $fillable = ['user_id', 'pen_name', 'biography', 'website_url', 'slug'];
 
     public function user() {
         return $this->belongsTo(User::class);
