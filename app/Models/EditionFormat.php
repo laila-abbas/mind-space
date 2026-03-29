@@ -10,7 +10,7 @@ class EditionFormat extends Model
 {
      use HasFactory, SoftDeletes;
      
-    protected $fillable = ['edition_id', 'format', 'ISBN', 'cover_image_path', 'price', 'stock', 'pages'];
+    protected $fillable = ['edition_id', 'format', 'ISBN', 'cover_image_path', 'price', 'stock', 'pages', 'duration_seconds', 'file_path', 'file_extension', 'size_MB', 'narrator'];
 
     public function Edition() {
         return $this->belongsTo(Edition::class);
@@ -20,5 +20,19 @@ class EditionFormat extends Model
         return $this->cover_image_path
             ? asset('storage/' . $this->cover_image_path)
             : asset('images/default_cover.jpg');
+    }
+
+    public function getIsDigitalAttribute() {
+        return in_array($this->format, ['e-book', 'audiobook']);
+    }
+
+    public function getIsFreeAttribute() {
+        return $this->price == 0;
+    }
+
+    public function getFileUrlAttribute() {
+        return $this->file_path
+            ? asset('storage/' . $this->file_path)
+            : null;
     }
 }

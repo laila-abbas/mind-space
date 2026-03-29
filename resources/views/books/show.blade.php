@@ -94,29 +94,108 @@
                         @endif
  
                         {{-- formats --}}
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                             @foreach($edition->formats as $format)
-                                <div class="border border-brand shadow-sm dark:shadow-black/20 rounded-xl p-4 flex flex-col items-center text-center bg-bg-surface">
-                                    <div class="w-32 h-48 rounded-xl shadow mb-2">
-                                        <img src="{{ $format->cover_image }}" class="w-full h-full object-cover rounded-xl">
+                                <div class="border border-brand shadow-sm dark:shadow-black/20 rounded-xl p-4 flex flex-col bg-bg-surface transition-all">
+                                    
+                                    <div class="relative w-full max-w-[140px] sm:max-w-[160px] aspect-[2/3] mb-4 mx-auto group">
+                                        <img src="{{ $format->cover_image }}" 
+                                            class="w-full h-full object-cover rounded-xl border border-brand shadow-sm transition-transform group-hover:scale-[1.02]"
+                                            alt="{{ $format->format }} cover">
+                                        
+                                        <span class="absolute top-2 right-2 bg-black/60 backdrop-blur-md text-white text-[9px] px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">
+                                            {{ $format->format }}
+                                        </span>
                                     </div>
-                                    <h4 class="font-semibold">{{ ucfirst($format->format) }}</h4>
-                                    @if($format->pages)
-                                        <p class="text-sm">{{ trans_choice('book.pages', $format->pages, ['count' => $format->pages]) }}</p>
-                                    @endif
-                                    @if($format->stock !== null)
-                                        <p class="text-sm text-text-muted">{{ $format->stock }} {{ __('book.in_stock') }}</p>
-                                    @endif
-                                    <p class="mt-1 font-bold text-brand-accent">
-                                        @if($format->price > 0)
-                                            ${{ number_format($format->price, 2) }}
+
+                                    <div class="flex-1 text-center flex flex-col">
+                                        
+                                        <div class="flex-1 flex flex-col justify-center gap-1 mt-2">
+                                            @if($format->format === 'audiobook')
+                                                @if($format->narrator)
+                                                    <p class="text-sm text-brand-accent font-medium leading-tight">
+                                                        <span class="text-text-muted font-normal">Narrated by</span> {{ $format->narrator }}
+                                                    </p>
+                                                @endif
+                                                
+                                                @if($format->duration_seconds)
+                                                    <p class="text-sm text-text-muted flex items-center justify-center gap-1">
+                                                        <x-lucide-headphones class="w-3 h-3" />
+                                                        {{ floor($format->duration_seconds / 3600) }}h {{ floor(($format->duration_seconds / 60) % 60) }}m
+                                                    </p>
+                                                @endif
+
+                                            @elseif($format->pages)
+                                                <p class="text-sm text-text-muted flex items-center justify-center gap-1">
+                                                    <x-lucide-layers class="w-3 h-3" />
+                                                    {{ trans_choice('book.pages', $format->pages, ['count' => $format->pages]) }}
+                                                </p>
+                                            @endif
+
+                                            @if(in_array($format->format, ['e-book', 'audiobook']) && $format->size_MB)
+                                                <p class="text-xs text-text-muted font-mono bg-gray-100 dark:bg-gray-800 self-center px-1.5 py-0.5 rounded mt-1">
+                                                    {{ number_format($format->size_MB, 1) }} MB
+                                                </p>
+                                            @endif
+
+                                            @if($format->stock)
+                                                <p class="text-xs text-amber-600 font-medium mt-1">
+                                                    {{ $format->stock }} {{ __('book.in_stock') }}
+                                                </p>
+                                            @endif
+                                        </div>
+
+                                        <div class="mt-1">
+                                            @if($format->is_free)
+                                                <span class="text-green-700 dark:text-green-400 text-sm font-bold rounded-full uppercase">
+                                                    {{ __('book.free') }}
+                                                </span>
+                                            @else
+                                                <span class="text-sm font-bold text-brand-accent">
+                                                    ${{ number_format($format->price, 2) }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-5 flex items-center justify-center gap-2">
+                                        @if($format->is_free && $format->is_digital)
+                                            
+                                            @if($format->format === 'audiobook')
+                                                <button class="flex-1 flex items-center justify-center gap-2 py-2 bg-brand rounded-lg hover:bg-brand-hover transition-colors text-sm font-bold shadow-sm cursor-pointer">
+                                                    <x-lucide-play class="w-4 h-4" />
+                                                    Play
+                                                </button>
+                                            @else
+                                                <a 
+                                                    href="{{ $format->file_url }}" 
+                                                    target="_blank"
+                                                    class="flex-1 flex items-center justify-center gap-2 py-2 bg-brand rounded-lg hover:bg-brand-hover transition-colors text-sm font-bold shadow-sm"
+                                                >
+                                                    <x-lucide-book-open class="w-4 h-4" />
+                                                    Read
+                                                </a>
+                                            @endif
+
+                                            @if($format->file_url)
+                                                <a 
+                                                    href="{{ $format->file_url }}" 
+                                                    download 
+                                                    title="Download {{ $format->format === 'audiobook' ? 'Audio' : strtoupper($format->file_extension ?? 'PDF') }}"
+                                                    class="p-2 rounded-lg transition-colors border border-text-subtle hover:bg-bg-muted"
+                                                >
+                                                    <x-lucide-download class="w-4 h-4" />
+                                                </a>
+                                            @endif
+
                                         @else
-                                            <span class="text-green-600 font-bold uppercase">{{ __('book.free') }}</span>
+                                            <button class="w-full flex items-center justify-center gap-2 py-2 bg-brand hover:bg-brand-hover rounded-lg shadow-sm font-bold text-sm transition-all cursor-pointer">
+                                                <x-lucide-shopping-cart class="w-4 h-4" />
+                                                Purchase
+                                            </button>
                                         @endif
-                                    </p>
-                                    <button class="mt-3 w-full py-2 bg-brand-hover text-white rounded-lg text-xs font-bold hover:bg-brand-accent transition">
-                                        Buy / Download
-                                    </button>
+                                    </div>
+
                                 </div>
                             @endforeach
                         </div>

@@ -39,9 +39,9 @@ class BookFactory extends Factory
                             ->shuffle()
                             ->take(fake()->numberBetween(1, 4));
 
-                $edition->formats()->saveMany(
-                    $formats->map(fn ($format) => EditionFormat::factory()->make(['format' => $format]))
-                );
+                foreach ($formats as $format) {
+                    EditionFormat::factory()->for($edition)->forFormat($format)->create();
+                }
             }
         });
     }

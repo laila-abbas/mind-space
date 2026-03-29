@@ -17,12 +17,33 @@ class EditionFormatFactory extends Factory
     public function definition(): array
     {
         return [
-            // 'format' => fake()->randomElement(['hardcover', 'paperback', 'e-book', 'audiobook']),
+            'format' => null,
             'ISBN' => fake()->optional()->isbn13(),
             'cover_image_path' => null,
-            'price' => fake()->randomFloat(2, 5, 50),
-            'pages' => fake()->numberBetween(100, 600),
-            'stock' => fake()->numberBetween(0, 100),
+            'price' => fake()->randomFloat(2, 0, 50),
+            'stock' => null,
+            'pages' => null,
+            'duration_seconds' => null,
+            'file_path' => null,
+            'file_extension' => null,
+            'size_MB' => null,
+            'narrator' => null,
         ];
     }
+
+     public function forFormat(string $format): static {
+        return $this->state(function () use ($format) {
+
+            return [
+                'format' => $format,
+                'pages' => $format === 'audiobook' ? null : fake()->numberBetween(100, 600),
+                'duration_seconds' => $format === 'audiobook' ? fake()->numberBetween(3000, 20000) : null,
+                'stock' => in_array($format, ['hardcover', 'paperback']) ? fake()->numberBetween(0, 100) : null,
+                'file_path' => in_array($format, ['e-book', 'audiobook']) ? fake()->filePath() : null,
+                'file_extension' => in_array($format, ['e-book', 'audiobook']) ? ($format === 'audiobook' ? 'mp3' : 'pdf') : null,
+                'size_MB' => in_array($format, ['e-book', 'audiobook']) ? fake()->numberBetween(1, 200) : null,
+                'narrator' => $format === 'audiobook' ? fake()->name() : null,
+            ];
+        });
+    }   
 }

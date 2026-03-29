@@ -7,9 +7,13 @@ use App\Models\Edition;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    /* single table for all formats 
+        1. avoids unnecessary joins, 
+        2. the differences are minimal among formats
+        3. nulls don't usually cause significant performance issues
+        fields like pages, duration_seconds, size_MB, narrator, etc.
+        are stored as columns instead of JSON to keep queries simple and efficient. */
+
     public function up(): void
     {
         Schema::create('edition_formats', function (Blueprint $table) {
@@ -19,8 +23,15 @@ return new class extends Migration
             $table->string('ISBN')->unique()->nullable();
             $table->string('cover_image_path')->nullable();
             $table->decimal('price', 10, 2)->default(0);
-            $table->integer('stock')->default(0);
-            $table->integer('pages')->nullable();
+
+            $table->integer('stock')->nullable();
+            $table->integer('pages')->nullable(); 
+            $table->integer('duration_seconds')->nullable(); 
+            $table->string('file_path')->nullable();           
+            $table->string('file_extension')->nullable();           
+            $table->decimal('size_MB', 8, 2)->nullable(); 
+            $table->string('narrator')->nullable(); // for audio 
+
             $table->softDeletes();
             $table->timestamps();
             $table->unique(['edition_id', 'format']);
