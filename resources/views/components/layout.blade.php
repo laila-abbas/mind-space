@@ -67,5 +67,8 @@
     <main class="px-6 sm-md:px-12 mt-6">
         {{ $slot }}
     </main>
+
+    <x-audio-player />
+    
 </body>
 </html>

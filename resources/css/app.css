@@ -112,7 +112,7 @@ body { font-family: var(--font-sans); }
   --color-bg-divider: #e0d6c8;
   --color-bg-overlay: rgba(60, 40, 30, 0.4);
 
-  --color-text-main: #4a3728;
+  --color-text-main: #271c14;
   --color-text-strong: #2d1e12;
   --color-text-muted: #7c6a5a;
   --color-text-subtle: #a69382;
@@ -136,8 +136,8 @@ body { font-family: var(--font-sans); }
   --color-bg-divider: #334155;
   --color-bg-overlay: rgba(0, 0, 0, 0.8);
 
-  --color-text-main: #cbd5e1;
-  --color-text-strong: #f8fafc;
+  --color-text-main: #0b62d4;
+  --color-text-strong: #3572af;
   --color-text-muted: #94a3b8;
   --color-text-subtle: #64748b;
 
@@ -184,7 +184,7 @@ body { font-family: var(--font-sans); }
   --color-bg-divider: #333333;
   --color-bg-overlay: rgba(255, 0, 255, 0.2);
 
-  --color-text-main: #00ff9f; 
+  --color-text-main: #a3f1e2; 
   --color-text-strong: #ffffff;
   --color-text-muted: #008f5a;
   --color-text-subtle: #4d4d4d;
@@ -210,7 +210,7 @@ body { font-family: var(--font-sans); }
   --color-bg-overlay: rgba(0, 0, 0, 0.65);
 
   /* text hierarchy */
-  --color-text-main: #e6dbd5;     
+  --color-text-main: #b1470e;     
   --color-text-strong: #f5efe9;   
   --color-text-muted: #b8a89f;    
   --color-text-subtle: #8b6f63;   

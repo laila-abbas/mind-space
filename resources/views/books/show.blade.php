@@ -162,7 +162,14 @@
                                         @if($format->is_free && $format->is_digital)
                                             
                                             @if($format->format === 'audiobook')
-                                                <button class="flex-1 flex items-center justify-center gap-2 py-2 bg-brand rounded-lg hover:bg-brand-hover transition-colors text-sm font-bold shadow-sm cursor-pointer">
+                                                <button 
+                                                    @click="$dispatch('play-audio', { {{-- the event play-audio bubbles up to the window object --}} 
+                                                        url: '{{ $format->file_url }}', 
+                                                        title: '{{ $edition->edition_title }}', 
+                                                        cover: '{{ $format->cover_image }}',
+                                                    })"
+                                                    class="flex-1 flex items-center justify-center gap-2 py-2 bg-brand rounded-lg hover:bg-brand-hover transition-colors text-sm font-bold cursor-pointer"
+                                                >
                                                     <x-lucide-play class="w-4 h-4" />
                                                     Play
                                                 </button>
