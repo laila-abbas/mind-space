@@ -72,3 +72,8 @@ Publishing House Management Platform
 ![delete-account](https://github.com/user-attachments/assets/73f4ec55-3d29-47eb-9767-0dafc6aa3060)
 
 ![reviews](https://github.com/user-attachments/assets/37a18147-472a-4479-8da2-25bf3061ed13)
+
+![categories + publishing houses](https://github.com/user-attachments/assets/5e1b1ff2-dc59-4151-86a4-fb36c6317c2d)
+
+![free e-books + audio](https://github.com/user-attachments/assets/b4992bcc-a132-4bd0-99b5-7cc029fc0bb7)
+
