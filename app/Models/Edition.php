@@ -29,7 +29,7 @@ class Edition extends Model
     }
 
     public function formats() {
-        return $this->hasMany(EditionFormat::class);
+        return $this->hasMany(EditionFormat::class)->orderBy('id');
     }
 
     public function scopePublished($query) {

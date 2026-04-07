@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <nav role="navigation" aria-label="Pagination Navigation" class="flex justify-center items-center space-x-2">
+    <nav role="navigation" aria-label="Pagination Navigation" class="flex flex-wrap justify-center items-center space-x-2">
         @if ($paginator->onFirstPage())
             <span class="px-4 py-2 bg-bg-muted text-text-muted rounded-lg cursor-not-allowed">
                 &laquo;

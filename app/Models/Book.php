@@ -44,7 +44,7 @@ class Book extends Model
     }
 
     public function getCoverImageAttribute() {
-        $firstFormat = $this->published_editions->flatMap->formats->first();
+        $firstFormat = $this->published_editions->flatMap->formats->first(fn($format) => !empty($format->cover_image_path));
         return $firstFormat?->cover_image_path
             ? asset('storage/' . $firstFormat->cover_image_path)
             : asset('images/default_cover.jpg');
