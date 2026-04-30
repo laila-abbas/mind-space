@@ -52,8 +52,6 @@ class ElasticsearchService
             'author_slugs' => $book->authors->pluck('slug')->toArray(),
 
             'variants' => $variants,
-
-            'min_price' => collect($variants)->pluck('price')->min() ?? 0,
         ];
 
         return $this->client->index([
@@ -108,42 +106,47 @@ class ElasticsearchService
             $filter[] = ['term' => ['publishing_houses_slugs' => $filters['publisher']]];
         }
 
+        $variantConditions = [];
+
         if (!empty($filters['language'])) {
-            $filter[] = [
-                'nested' => [
-                    'path' => 'variants',
-                    'query' => ['term' => ['variants.language' => $filters['language']]]
-                ]
+            $variantConditions[] = [
+                'term' => ['variants.language' => $filters['language']]
             ];
         }
 
         if (!empty($filters['format'])) {
-            $filter[] = [
-                'nested' => [
-                    'path' => 'variants',
-                    'query' => ['term' => ['variants.format' => $filters['format']]]
-                ]
+            $variantConditions[] = [
+                'term' => ['variants.format' => $filters['format']]
             ];
         }
 
-        if (!empty($filters['price_max'])) {
-            $filter[] = [
-                'nested' => [
-                    'path' => 'variants',
-                    'query' => ['range' => ['variants.price' => ['lte' => (float) $filters['price_max']]]]
+        if (isset($filters['price_max']) && $filters['price_max'] !== '') {
+            $variantConditions[] = [
+                'range' => [
+                    'variants.price' => [
+                        'lte' => (float) $filters['price_max']
+                    ]
                 ]
             ];
         }
 
         if (!empty($filters['published_from'])) {
             $year = (int) $filters['published_from'];
+            $variantConditions[] = [
+                'range' => [
+                    'variants.published_at' => [
+                        'gte' => $year . '-01-01',
+                        'lte' => $year . '-12-31'
+                    ]
+                ]
+            ];
+        }
+
+        if (!empty($variantConditions)) {
             $filter[] = [
                 'nested' => [
                     'path' => 'variants',
-                    'query' => ['range' => ['variants.published_at' => [
-                        'gte' => $year . '-01-01',
-                        'lte' => $year . '-12-31'
-                    ]]]
+                    'query' => ['bool' => ['must' => $variantConditions]]
                 ]
             ];
         }
