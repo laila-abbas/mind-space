@@ -10,6 +10,8 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\EditionReviewController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PublishingHouseController;
+use App\Services\ElasticsearchService;
+use Illuminate\Http\Request;
 
 
 Route::get('/', function () {
@@ -87,3 +89,17 @@ Route::get('/publishing-houses', [PublishingHouseController::class, 'index'])
 
 Route::get('/publishing-houses/{publishingHouse:slug}', [PublishingHouseController::class, 'show'])
     ->name('publishing-houses.show');
+
+
+
+
+Route::get('/test-es', function (ElasticsearchService $service) {
+    return $service->testConnection();
+});
+
+Route::get('/es/books/search', function (Request $request, ElasticsearchService $service) {
+    $query = $request->query('q', '');
+    $filters = $request->except('q');
+    return $service->search($query, $filters);
+});
+

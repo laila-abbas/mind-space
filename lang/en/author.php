@@ -7,5 +7,5 @@ return [
     'official_website' => 'Official Website',
     'published' => 'published',
     'books' => 'Books',
-    'no_books_yet' => 'No books yet.',
+    'no_books' => 'No books.',
 ];

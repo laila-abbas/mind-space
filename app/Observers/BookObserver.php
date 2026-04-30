@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Book;
+use App\Services\ElasticsearchService;
 
 class BookObserver
 {
@@ -32,6 +33,7 @@ class BookObserver
         }
 
         $book->editions->each->delete();
+        app(ElasticsearchService::class)->deleteBook($book->id);
     }
 
     /**
@@ -49,4 +51,10 @@ class BookObserver
     {
         $book->editions()->withTrashed()->get()->each->forceDelete();
     }
+
+    public function saved(Book $book)
+    {
+        app(ElasticsearchService::class)->indexBook($book); // TODO: create jobs for updating es db
+    }
+    
 }

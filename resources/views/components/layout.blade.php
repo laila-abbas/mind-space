@@ -38,6 +38,7 @@
 
             {{-- large screens --}}
             <div class="hidden sm-md:flex items-center">
+                <x-search-bar />
                 <x-user-menu />
             </div>
 
@@ -56,6 +57,7 @@
              @click.away="mobileOpen = false"
              class="sm-md:hidden fixed inset-x-0 top-[72px] bottom-0 px-6 pb-4 flex flex-col space-y-2 bg-bg-page shadow-md overflow-y-auto z-40"
         >
+            <x-search-bar mobile />
            <x-user-menu mobile />
         </div>
         

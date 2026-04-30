@@ -3,6 +3,7 @@
 <div 
     x-data="{ open: false }" 
     class="relative"
+    x-cloak
     {{ $attributes }}
 >
     <button @click="open = !open" class="flex items-center focus:outline-none cursor-pointer">

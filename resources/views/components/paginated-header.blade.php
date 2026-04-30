@@ -10,7 +10,7 @@
     $titleSize = $sizes[$size] ?? $sizes['lg'];
 @endphp
 
-<div {{ $attributes->merge(['class' => 'flex flex-col md:flex-row items-center md:items-end justify-center md:justify-between mb-10 text-center md:text-left space-y-4 md:space-y-0']) }}>
+<div {{ $attributes->merge(['class' => 'flex flex-col md:flex-row items-center md:items-end justify-center md:justify-between mb-5 text-center md:text-left space-y-4 md:space-y-0']) }}>
     <div>
         <h1 class="{{ $titleSize }} font-bold text-center md:text-start tracking-tight">
             {{ $title }}

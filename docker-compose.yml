@@ -1,0 +1,25 @@
+# A configuration file that describes multiple containers (services) and how they should run together
+
+services:
+  elasticsearch:
+    image: elasticsearch:9.2.8
+    container_name: laravel_elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  kibana:
+    image: kibana:9.2.8
+    container_name: laravel_kibana
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+volumes:
+  esdata:
