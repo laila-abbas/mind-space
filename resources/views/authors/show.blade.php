@@ -37,6 +37,8 @@
         <div>
             <x-paginated-header :title="__('author.books')" :collection="$books" />
 
+            <x-filters-panel :action="route('authors.show', $author)" />
+
             @if($books->isEmpty())
                 <div class="flex flex-col items-center justify-center py-20 bg-brand-soft/10 rounded-2xl border-2 border-dashed border-border-brand-soft">
                     <div class="p-4 rounded-full bg-bg-surface mb-4 shadow-sm">

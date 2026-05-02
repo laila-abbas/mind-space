@@ -1,3 +1,5 @@
+@props(['action' => route('books.index')])
+
 <div x-data="{ open: false }" class="flex justify-end mb-4">
 
     <div class="relative">
@@ -35,10 +37,11 @@
                     if (search !== null) {
                         $el.querySelector('input[name=q]').value = search;
                     }"
-                action="{{ route('books.index') }}" method="GET" class="p-4 space-y-2">
+                action="{{ $action }}" method="GET" class="p-4 space-y-2">
 
                 {{-- preserve search --}}
                 <input type="hidden" name="q" value="{{ request('q') }}">
+                <input type="hidden" name="subcategory" value="{{ request('subcategory') }}">
 
                 {{-- header --}}
                 <div class="flex justify-between items-center">
@@ -94,7 +97,7 @@
                 {{-- actions --}}
                 <div class="flex items-center justify-between pt-1">
                     
-                    <a href="{{ route('books.index') }}"
+                    <a href="{{ request()->fullUrlWithoutQuery(['language','format','price_max','published_from']) }}"
                     class="text-sm text-text-muted hover:underline">
                         Clear
                     </a>

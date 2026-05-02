@@ -1,12 +1,17 @@
 @props(['mobile' => false])
 
-<form action="{{ route('books.index') }}" method="GET" 
+<form action="{{ url()->current() }}" method="GET" 
     @if(!$mobile) 
         x-data="{ expanded: false }" 
         @click.away="expanded = false"
     @endif
     class="{{ $mobile ? 'px-4 py-2' : 'flex items-center' }}">
     
+    {{-- preserve existing filters --}}
+    @foreach(request()->except('q') as $key => $value)
+        <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+    @endforeach
+
     <div class="relative w-full">
         <input 
             id = "search-query"

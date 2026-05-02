@@ -47,7 +47,7 @@ class ElasticsearchService
 
             'categories_slugs' => $book->categories->pluck('slug')->toArray(),
             'publishing_houses_slugs' => $book->published_editions
-                ->map(fn($e) => $e->publishingHouse?->name)
+                ->map(fn($e) => $e->publishingHouse?->slug)
                 ->filter()->unique()->values()->toArray(),
             'author_slugs' => $book->authors->pluck('slug')->toArray(),
 
@@ -95,7 +95,7 @@ class ElasticsearchService
         }
 
         if (!empty($filters['category'])) {
-            $filter[] = ['term' => ['categories_slugs' => $filters['category']]];
+            $filter[] = ['terms' => ['categories_slugs' => $filters['category']]];
         }
 
         if (!empty($filters['author'])) {

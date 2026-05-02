@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Book;
+use App\Services\CatalogSearchService;
+use App\DTOs\SearchContext;
 
 
 class CategoryController extends Controller
@@ -15,27 +17,26 @@ class CategoryController extends Controller
         return view('categories.index', compact('categories'));
     }
 
-
-    public function show(Category $category) {
+    public function show(Request $request, Category $category, CatalogSearchService $search) {
         $subcategories = $category->children()->get();
+        $categorySlugs = $subcategories->pluck('slug')->push($category->slug)->values()->toArray();
+        $selectedCategories = $request->filled('subcategory')
+            ? [$request->subcategory]
+            : $categorySlugs;
 
-        // category + its children
-        $categoryIds = $subcategories->pluck('id')->push($category->id);
-
-        // all books that belong to any category in the previous list
-        $books = Book::withCatalogData()
-            ->whereHas('categories', function ($q) use ($categoryIds) {
-                $q->whereIn('categories.id', $categoryIds);
-        });
-
-        // subcategory filter 
-        if ($subcategorySlug = request('subcategory')) {
-            $books->whereHas('categories', function ($q) use ($subcategorySlug) {
-                $q->where('slug', $subcategorySlug);
+        $baseQuery = Book::withCatalogData()
+            ->whereHas('categories', function ($q) use ($selectedCategories) {
+                $q->whereIn('slug', $selectedCategories);
             });
-        }
 
-        $books = $books->paginate(12);
+        $books = $search->resolve(new SearchContext(
+            query: $request->query('q'),
+            userFilters: $request->only(['language', 'format', 'price_max', 'published_from']),
+            contextFilters: ['category' => $selectedCategories],
+            page: $request->input('page', 1),
+            perPage: 12,
+            baseQuery: $baseQuery,
+        ));
 
         return view('categories.show', compact('category', 'subcategories', 'books'));
     }
